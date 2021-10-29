@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>JS4-3</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let polje = [1, 2, 3, 4, 5];
+
+      console.log(polje.length);
+
+      polje.length = 3;
+
+      console.log(polje);
+
+      polje.length = 5;
+
+      console.log(polje[3]);
+
+      console.log(polje);
+
+      polje.push(5);
+      polje[3] = 10;
+
+      console.log(polje);
+
+      polje.forEach(function (broj, indeks) {
+        console.log(broj * indeks);
+      });
+
+      console.log(polje.pop());
+
+      console.log(polje);
+      console.log(polje.length);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS3-9</title>
+  </head>
+
+  <body>
+    Unesite broj izmedju 1 i 99!<br />
+
+    <script type="text/javascript">
+      let i;
+
+      do {
+        i = prompt('Unesite broj', 0);
+      } while (isNaN(i) || Number(i) < 1 || Number(i) > 99);
+
+      console.log(i);
+    </script>
+  </body>
+</html>

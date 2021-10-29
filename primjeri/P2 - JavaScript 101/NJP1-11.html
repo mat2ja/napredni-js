@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Primjer 2 - 14</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      function funkcija(f) {
+        f(5);
+        f(10);
+      }
+
+      function ispisi(a) {
+        alert(a);
+      }
+
+      funkcija(ispisi);
+
+      funkcija(function (a) {
+        alert(a * 3);
+      });
+    </script>
+  </body>
+</html>

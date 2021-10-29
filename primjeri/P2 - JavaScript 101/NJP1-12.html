@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS3-5</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let prostbroj = function (a) {
+        let prost = true;
+
+        for (let i = 2; i <= a / 2; i++) {
+          if (a % i == 0) prost = false;
+        }
+
+        return prost;
+      };
+
+      let prostiBrojeviDoN = function (n) {
+        let count = 0;
+
+        for (let i = 1; i < n; i++) {
+          if (prostbroj(i)) {
+            console.log(i);
+            count++;
+          }
+        }
+
+        return count;
+      };
+
+      console.log('Ima ih ' + prostiBrojeviDoN(100));
+    </script>
+  </body>
+</html>
+ 

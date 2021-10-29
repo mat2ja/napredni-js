@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Primjer 2 - 14</title>
+
+    <script type="text/javascript">
+      let izvediDvaputSArg = function (f, arg) {
+        // f == alert
+        // arg == 'pozdrav'
+
+        // alert('pozdrav')
+        // alert('pozdrav')
+        f(arg);
+        f(arg);
+      };
+    </script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      izvediDvaputSArg(alert, 'Pozdrav!');
+
+      izvediDvaputSArg(function (a) {
+        console.log(a);
+      }, 5);
+
+      izvediDvaputSArg(function (a) {
+        console.log(a * a);
+      }, 10);
+    </script>
+  </body>
+</html>

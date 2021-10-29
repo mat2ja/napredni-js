@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Primjer 2 - 15</title>
+
+    <script type="text/javascript">
+      /* function multiplier(factor) {
+
+            return function(number) {
+                return number * factor;
+            };
+        }*/
+
+      let multiplier = (factor) => (number) => number * factor;
+
+      /*function multiplier(factor) {
+
+
+            function mnozenje(number) {
+                return number * factor;
+            }
+
+            return mnozenje;
+        }*/
+    </script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let duplaj = multiplier(2);
+
+      let putatri = multiplier(3);
+
+      console.log(duplaj(5));
+      console.log(putatri(5));
+      console.log(putatri(100));
+    </script>
+  </body>
+</html>

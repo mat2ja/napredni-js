@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>JS4-6</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let polje1 = [6, 1, 14, 3, 4, 5];
+      let polje2 = [54, 6, 77, 4, 10, 41];
+
+      function parni(element) {
+        if (element % 2 == 0) return true;
+      }
+
+      //novopolje=polje1.filter(parni).concat(polje2.filter(parni));
+
+      novopolje = polje1.concat(polje2).filter(parni);
+
+      alert(novopolje);
+    </script>
+  </body>
+</html>

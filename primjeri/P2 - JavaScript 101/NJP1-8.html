@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Primjer 2 - 14</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let izvediDvaput = function (f) {
+        // f = pozdrav
+        // pozdrav()
+        // pozdrav()
+        f();
+        f();
+      };
+
+      let pozdrav = function () {
+        alert('Bok!');
+      };
+
+      let pozdravUKonzolu = function () {
+        console.log('Pozdrav u konzolu');
+      };
+
+      izvediDvaput(pozdrav);
+      izvediDvaput(pozdravUKonzolu);
+
+      izvediDvaput(function () {
+        console.log(5);
+      });
+
+      izvediDvaput(function () {
+        console.log('Anonimna funkcija');
+        console.log('Definirana prilikom pozivanja funkcije izvediDvaput');
+      });
+
+      izvediDvaput(function () {
+        console.log(5);
+      });
+    </script>
+  </body>
+</html>

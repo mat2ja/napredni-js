@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>JS4-4</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let polje = [5, 3, 6, 17, 8, 6, 3, 4, 5, 6, 33, 21, 11];
+
+      let polje2 = polje.filter((e) => e > 7);
+
+      let polje3 = polje.map((e) => e + 10);
+
+      console.log(polje2);
+      console.log(polje3);
+
+      //let polje = polje.map(e => e+10);
+
+      //novopolje=polje.map(e=> e+10);
+      //let novopolje = polje.map((e) => {return e+10;});
+
+      let novopolje = polje
+        .map((e) => e + 10)
+        .filter((e) => e % 2 == 0)
+        .forEach((e) => console.log(e));
+    </script>
+  </body>
+</html>

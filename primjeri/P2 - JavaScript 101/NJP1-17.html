@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS3-15</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let automobil = {};
+
+      automobil.model = 'Skoda Fabia';
+      automobil.vrata = 5;
+      automobil.ks = '100';
+      automobil.cijena = '100000';
+      automobil.vmax = 190;
+
+      for (let prop in automobil) {
+        console.log(prop);
+        console.log(automobil[prop]);
+      }
+    </script>
+  </body>
+</html>

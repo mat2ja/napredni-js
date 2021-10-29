@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS4-2</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let gradovi = [];
+
+      gradovi[0] = 'Zagreb';
+      gradovi[1] = 'Split';
+      gradovi[2] = 'Rijeka';
+      gradovi[3] = 'Osijek';
+      gradovi[4] = 'Pula';
+      gradovi[5] = 'Zadar';
+      gradovi[6] = 'Rijeka';
+
+      console.log(gradovi);
+
+      for (let i = 0; i < gradovi.length; i++) {
+        console.log(gradovi[i]);
+      }
+
+      function ispis(grad, i) {
+        document.write(`${grad} (indeks=${i})<br/>`);
+      }
+
+      gradovi.forEach(ispis);
+
+      document.write('<br/>');
+
+      gradovi.sort();
+
+      gradovi.reverse();
+
+      for (i = 0; i < gradovi.length; i++) {
+        document.write(gradovi[i] + '<br/>');
+      }
+
+      document.write('<br/>');
+
+      document.write(gradovi.join('<br>'));
+
+      alert(gradovi);
+
+      document.write('<br/>');
+      document.write('<br/>');
+
+      document.write(gradovi.indexOf('Rijeka'));
+    </script>
+  </body>
+</html>

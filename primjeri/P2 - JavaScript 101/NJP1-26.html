@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>JS4-13</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      // substring (start, end)
+
+      // substr (start, length)
+
+      /*
+    var s1="Neki tekst s dosta rijeci";
+
+    var s2="Jos neki test";
+
+    console.log(s1.substring(2,4));
+    console.log(s1.substr(2,4));
+    console.log(s1.substring(7));
+    console.log(s1.substr(7));*/
+
+      let str = 'Treba mi polje a ne string';
+
+      console.log(str.split('a'));
+
+      let str2 = str.split('a').join('A');
+
+      console.log(str2);
+
+      console.log(str.split(''));
+
+      var str3 = str.split('').reverse().join('');
+
+      console.log(str2);
+
+      console.log(str3);
+
+      //toLowerCase, trim
+
+      let tekst = '  ABC';
+
+      console.log(tekst.toLowerCase().trim() == 'abc');
+    </script>
+  </body>
+</html>

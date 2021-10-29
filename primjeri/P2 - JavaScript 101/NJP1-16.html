@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS3-12</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let osoba = {};
+
+      osoba.ime = 'Marko';
+
+      osoba.datumRodjenja = {};
+
+      osoba.datumRodjenja.dan = 29;
+      osoba.datumRodjenja.mjesec = 7;
+      osoba.datumRodjenja.godina = 1985;
+      osoba.datumRodjenja.pretvoriUString = function () {
+        let s = this.dan + '.' + this.mjesec + '.' + this.godina + '.';
+
+        return s;
+      };
+
+      console.log(osoba.datumRodjenja.mjesec);
+      console.log(osoba.datumRodjenja.pretvoriUString());
+      console.log(osoba);
+
+      osoba.pozdrav = function () {
+        console.log(
+          'Ja sam ' +
+            this.ime +
+            ' i rodjen sam ' +
+            this.datumRodjenja.pretvoriUString()
+        );
+      };
+
+      osoba.pozdrav();
+
+      let osoba2 = {
+        ime: 'Marko',
+        datumRodjenja: { dan: 29, mjesec: 7, godina: 1985 },
+        metoda: function () {
+          console.log('Bok');
+        },
+      };
+    </script>
+  </body>
+</html>

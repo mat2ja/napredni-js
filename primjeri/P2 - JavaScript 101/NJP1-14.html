@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS3-10</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let osoba = {};
+
+      osoba.ime = 'Ivan';
+      osoba.prezime = 'Ivankovic';
+      osoba.dob = 25;
+      osoba.pozdrav = function () {
+        console.log('Bok');
+      };
+
+      osoba.opis = function () {
+        // console.log("Ja sam "+this.ime+" "+this.prezime+" i imam "+this.dob+" godina!");
+        //altgr+7
+        console.log(`Ja sam ${this.ime} ${this.prezime} i imam ${this.dob}.`);
+      };
+
+      osoba.pozdrav();
+      osoba.pozdrav();
+      osoba.opis();
+      osoba.dob++;
+      osoba.opis();
+
+      console.log(osoba);
+    </script>
+  </body>
+</html>

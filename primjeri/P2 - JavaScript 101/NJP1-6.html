@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Primjer 2 - 8</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      function funkcijaSParametrima(a, b = 100) {
+        console.log(a);
+        console.log(b);
+      }
+
+      let a = 5;
+      let b = 6;
+      let c = 7;
+      let d = 8;
+
+      funkcijaSParametrima(a, b);
+      funkcijaSParametrima(c, d);
+      funkcijaSParametrima(29, 34);
+      funkcijaSParametrima('abc', true);
+      funkcijaSParametrima('abc');
+      funkcijaSParametrima();
+      funkcijaSParametrima('abc', 5, 6, 7, 8, 9);
+    </script>
+  </body>
+</html>

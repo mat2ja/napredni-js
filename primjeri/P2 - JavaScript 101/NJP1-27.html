@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS4-11a</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      zaposlenici = [
+        { ime: 'Petar', godine: 29, placa: 5000 },
+        { ime: 'Ivana', godine: 27, placa: 6000 },
+        { ime: 'Marko', godine: 29, placa: 7000 },
+        { ime: 'Davor', godine: 38, placa: 8000 },
+        { ime: 'Petra', godine: 32, placa: 9000 },
+        { ime: 'Ivan', godine: 25, placa: 10000 },
+        { ime: 'Goran', godine: 65, placa: 11000 },
+      ];
+
+      // filtriraj da ostanu samo mladji od 30
+
+      zaposlenici = zaposlenici.filter((z) => z.godine < 30);
+      console.log(zaposlenici);
+
+      // izracunaj prosjecnu placu
+
+      let suma = 0;
+      zaposlenici.forEach((z) => (suma += z.placa));
+      let prosjek = suma / zaposlenici.length;
+      console.log(prosjek);
+
+      // izbrisati zaposlenika koji ima placu 7000
+
+      // zaposlenici=zaposlenici.filter(z=>z.placa!=7000);
+
+      let i = zaposlenici.findIndex((z) => z.placa == 7000);
+      zaposlenici.splice(i, 1);
+
+      // mapiraj svaki objekt u polju u njegov tekstualni opis
+
+      zaposlenici = zaposlenici.map(
+        (z) => `Ja sam ${z.ime} i imam ${z.godine} godina,
+          i plaću ${z.placa}`
+      );
+
+      console.log(zaposlenici);
+    </script>
+  </body>
+</html>

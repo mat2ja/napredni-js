@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ES6-1</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      let a = 10;
+      let b = { s1: 5, s2: 10 };
+
+      const c = 20;
+      const d = { s1: 10, s2: 20 };
+
+      // c=50;
+
+      d.s1 = 20;
+
+      console.log(d);
+
+      //////////// dodjeljivanje vrijednosti/reference
+
+      let e = a;
+      e = 30;
+      console.log(a);
+
+      let f = b;
+      f.s1 = 50;
+      b.s2 = 50;
+      console.log(f);
+      console.log(b);
+
+      let x = {};
+      let y = { ...b };
+      // Object.assign(x,b);
+      console.log(x);
+      x.s1 = 100;
+      console.log(y);
+      console.log(b);
+    </script>
+  </body>
+</html>

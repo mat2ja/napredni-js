@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>JS4-8</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      console.log(Math);
+
+      var polje = [5, 3, 6, 17, 8, 6, 3, 4, 5, 6, 33, 21, 11];
+
+      function maksPoljaFor(polje) {
+        var max = polje[0];
+
+        for (i = 0; i < polje.length; i++) {
+          max = Math.max(max, polje[i]);
+          //  if (max<polje[i]) max=polje[i];
+        }
+
+        return max;
+      }
+
+      function maksPoljaForEach(polje) {
+        var max = polje[0];
+
+        polje.forEach(function (element) {
+          max = Math.max(max, element);
+        });
+
+        return max;
+      }
+
+      function maksPoljaReduce(polje) {
+        return polje.reduce(function (trenutnonajveci, element) {
+          return Math.max(trenutnonajveci, element);
+        }, polje[0]);
+      }
+
+      alert(maksPoljaFor(polje));
+      alert(maksPoljaForEach(polje));
+      alert(maksPoljaReduce(polje));
+    </script>
+  </body>
+</html>
