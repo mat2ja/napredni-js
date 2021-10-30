@@ -38,17 +38,17 @@ const studenti = [
   {
     ime: 'mislav',
     jmbag: '0007498555',
-    prosjek: 3.9,
+    prosjek: 3.92,
     semestar: 3,
   },
 ];
 
 const printStudent = (student) => {
   const { ime, jmbag, prosjek, semestar } = student;
-  console.log(`${ime} (${jmbag}) - ${prosjek} (${semestar})`);
+  console.log(`${ime.toUpperCase()} (${jmbag}) - ${prosjek} (${semestar})`);
 };
 
-console.log('1. studenti:');
+console.log('Studenti:');
 studenti.forEach(printStudent);
 
 const sortStudents = (a, b) => {
@@ -60,14 +60,16 @@ const sortStudents = (a, b) => {
   return a.prosjek < b.prosjek ? 1 : -1;
 };
 
-console.log('\n2. Sortirano po semestru ↓, po prosjeku ↑:');
+console.log('\nSortirano po semestru ↓, po prosjeku ↑:');
 studenti.sort(sortStudents).forEach(printStudent);
-console.log('\n');
 
-const calcYear = ({ semestar }) => parseInt(semestar / 2);
+const calcYear = (semestar) =>
+  parseInt(semestar % 2 ? semestar / 2 + 1 : semestar / 2);
 
 const calcProsjek = ({ prosjek, brojStudenata }, student) => {
-  return (prosjek * (brojStudenata - 1) + student.prosjek) / brojStudenata;
+  const noviProsjek =
+    (prosjek * (brojStudenata - 1) + student.prosjek) / brojStudenata;
+  return parseFloat(noviProsjek.toFixed(2));
 };
 
 const fetchYearStats = (stats, currYear) =>
@@ -77,28 +79,58 @@ const initYearStats = (stats, year) => {
   const yearStats = {
     godina: year,
     brojStudenata: 0,
-    prosjek: 0.0,
+    prosjek: 0,
   };
   stats.push(yearStats);
   return yearStats;
 };
 
-const stats = studenti.reduce((arr, student) => {
-  console.log(student);
-  const year = calcYear(student);
-  const yearStats = fetchYearStats(arr, year) ?? initYearStats(arr, year);
+const statsPerYear = studenti.reduce((stats, student) => {
+  const year = calcYear(student.semestar);
+  const yearStats = fetchYearStats(stats, year) ?? initYearStats(stats, year);
   yearStats.brojStudenata++;
   yearStats.prosjek = calcProsjek(yearStats, student);
-  return arr;
+  return stats;
 }, []);
 
-console.log('\nStatistika po godinama:', stats);
+const sortedStatsPerYear = statsPerYear.sort((a, b) =>
+  a.prosjek < b.prosjek ? 1 : -1
+);
 
-const prosjekTrecegSemestra = studenti
-  .filter(({ semestar }) => semestar === 3)
-  .reduce(
-    (prosjek, student, i, studenti) =>
-      prosjek + student.prosjek / studenti.length,
-    0
-  );
-console.log('\nProsjek 3. semestra:', prosjekTrecegSemestra);
+console.log('\nStatistika po godinama:', sortedStatsPerYear);
+
+const prosjekGodine = (trazenaGodina) =>
+  studenti
+    .filter(({ semestar }) => calcYear(semestar) === trazenaGodina)
+    .reduce(
+      (prosjek, student, i, studenti) =>
+        prosjek + student.prosjek / studenti.length,
+      0
+    )
+    .toFixed(2);
+
+const prosjekTreceGodine = prosjekGodine(3);
+console.log('\nProsjek 3. godine:', prosjekTreceGodine);
+
+/*
+Studenti:
+MARIAN (0009282645) - 4.1 (5)
+PATRIK (0004498776) - 3.4 (5)
+MATIJA (0036519571) - 4.7 (5)
+MARIN (0004311714) - 2.6 (3)
+MISLAV (0007498555) - 3.92 (3)
+
+Sortirano po semestru ↓, po prosjeku ↑:
+MISLAV (0007498555) - 3.92 (3)
+MARIN (0004311714) - 2.6 (3)
+MATIJA (0036519571) - 4.7 (5)
+MARIAN (0009282645) - 4.1 (5)
+PATRIK (0004498776) - 3.4 (5)
+
+Statistika po godinama: [
+  { godina: 3, brojStudenata: 3, prosjek: 4.07 },
+  { godina: 2, brojStudenata: 2, prosjek: 3.26 }
+]
+
+Prosjek 3. godine: 4.07
+*/

@@ -14,6 +14,7 @@ Za ulazno polje [4,7,6,1,9,4,5,1,2,8], nakon filter metode novo polje treba izgl
 */
 
 // 1
+// const randArr = [4, 7, 6, 1, 9, 4, 5, 1, 2, 8];
 const randArr = [...Array(20)].map((n) => Math.floor(Math.random() * 10 + 1));
 console.log('Random array:', randArr);
 
@@ -22,7 +23,7 @@ const noDuplicates = [...new Set(randArr)];
 console.log('Without duplicates:', noDuplicates);
 
 // 3
-const filtered = randArr.filter((n, i) => n > i);
+const filtered = noDuplicates.filter((n, i) => n > i);
 console.log('Filtered:', filtered);
 
 // 4
