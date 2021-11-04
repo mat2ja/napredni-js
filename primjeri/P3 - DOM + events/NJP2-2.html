@@ -1,60 +1,1 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>NJP2-2</title>
-  </head>
-
-  <body>
-    <div>
-      <p id="prvi">Neki odlomak 1</p>
-      <p>Neki odlomak 2</p>
-      <p>Neki odlomak 3</p>
-    </div>
-
-    <div>
-      <p>Neki odlomak 4</p>
-      <p id="t">Neki <em>odlomak</em> 5</p>
-      <p>Neki odlomak 6</p>
-    </div>
-    <div>
-      <form>
-        Tekst 1: <input type="text" /><br />
-        Tekst 2: <input type="text" /><br />
-        Tekst 3: <input type="text" /><br />
-      </form>
-    </div>
-
-    <script>
-      document.title = 'Primjer';
-
-      const p = document.getElementById('t');
-
-      console.dir(p);
-
-      console.log(p.innerHTML);
-      console.log(p.outerHTML);
-      console.log(p.textContent);
-
-      p.innerHTML = "!!! <br/><input type='text'><br/>";
-
-      let elementi = document.getElementsByTagName('p'); // polje objekata koji predstavljaju sve p html elemente
-      // elementi=Array.from(elementi);
-      // console.log(elementi);
-
-      elementi = [...elementi];
-
-      console.log(elementi);
-      console.log(elementi[0].innerHTML);
-
-      for (let i = 0; i < elementi.length; i++) {
-        elementi[i].innerHTML = 'PROMJENA ' + (i + 1);
-      }
-
-      /*elementi.forEach(function(p){
-      p.innerHTML='abc';
-   });*/
-
-      elementi.filter((p, i) => i < 3).forEach((p) => (p.innerHTML = 'abc'));
-    </script>
-  </body>
-</html>
+<!DOCtype html><html><head>    <title>NJP2-2</title></head><body ><div>    <p id="prvi">Neki odlomak 1</p>    <p>Neki odlomak 2</p>    <p>Neki odlomak 3</p></div><div>    <p>Neki odlomak 4</p>    <p id="t">Neki <em>odlomak</em> 5</p>    <p>Neki odlomak 6</p></div><div>    <form>        Tekst 1: <input type="text"/><br/>        Tekst 2: <input type="text"/><br/>        Tekst 3: <input type="text"/><br/>    </form></div><script>   document.title="Primjer";   let p = document.getElementById('t')   console.dir(p);   console.log(p.innerHTML);   console.log(p.outerHTML);   console.log(p.textContent);   p.innerHTML="!!! <br/><input type='text'><br/>";  let elementi = document.getElementsByTagName("p");   // polje objekata koji predstavljaju sve p html elemente    elementi=Array.from(elementi);   //elementi=[...elementi];   console.log(elementi);  console.log(elementi[0].innerHTML);   for (i=0;i<elementi.length;i++){       elementi[i].innerHTML="PROMJENA "+(i+1);   }/*   elementi.forEach(function(p){      p.innerHTML='abc';   });*/   elementi.filter((p,i) =>i<3).forEach(p => p.innerHTML='abc');</script></body></html>

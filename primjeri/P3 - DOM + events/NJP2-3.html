@@ -1,34 +1,1 @@
-<!DOCtype html>
-<html>
-<head>
-    <title>JS5-4</title>
-
-</head>
-
-<body>
-
-  <input id="polje" value="123" type="text" max-length="8"/><br/>
-
-</div>
-
-<script>
-
-   let element = document.getElementById("polje");
-
-   element.value="tekst";
-
-   console.dir(element);
-
-   element.maxLength=8;
-
-
-   document.getElementsByTagName('input')[0].value="Drugi";
-
-
-
-
-</script>
-
-</body>
-
-</html>
+<!DOCtype html><html><head>    <title>NJP2-3</title></head><body ><div class="a">    <p id="prvi">Neki odlomak 1</p>    <p>Neki odlomak 2</p>    <p>Neki odlomak 3</p></div><div>    <p class="a">Neki odlomak 4</p>    <p class="a">Neki odlomak 5</p>    <p>Neki odlomak 6</p></div><div>    <form>        Tekst 1: <input type="text"/><br/>        Tekst 2: <input type="text"/><br/>        Tekst 3: <input type="text"/><br/>    </form></div><script>   var elementi = document.querySelectorAll("p.a");    for (i=0;i<elementi.length;i++){        elementi[i].innerHTML="PROMJENA "+Number(i+1);    }  // document.querySelector("p").innerHTML="PRVI";   document.querySelectorAll("p")[0].innerHTML="PRVI";</script></body></html>

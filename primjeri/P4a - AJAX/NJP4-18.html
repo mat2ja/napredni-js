@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-18</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <button class="btn btn-success">Load countries</button><br /><br /><br />
+    <div id="countries"></div>
+
+    <script>
+      let countries = [];
+
+      var div = document.getElementById('countries');
+      document.querySelector('button').addEventListener('click', getData);
+
+      function getData(e) {
+        fetch('data.php')
+          .then((data) => data.json())
+          .then((data) => {
+            console.log(data);
+            countries = data;
+            render();
+          });
+      }
+
+      function render() {
+        let items = countries;
+        console.log(items);
+
+        var html = ``;
+
+        html += `
+        <table class='table table-striped'>
+            <tr>
+                <th>Name</th>
+                <th>Capital</th>
+                <th>FlagURL</th>
+                <th>Gdp</th>
+                <th>Population</th>
+            </tr>
+        `;
+
+        html += items
+          .map(
+            (item) => `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.capital}</td>
+                <td><img height=20 width=40 src="${item.flagURL}"></td>
+                <td>${item.gdp}</td>
+                <td>${item.population}</td>
+            </tr>
+        `
+          )
+          .join('');
+
+        html += `
+            </table>
+        `;
+
+        div.innerHTML = html;
+      }
+    </script>
+    <!-- table.table.table-striped>(tr>th*5)+(tr>td*5)*5 -->
+  </body>
+</html>

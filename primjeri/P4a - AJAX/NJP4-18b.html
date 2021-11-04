@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-18</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <button class="btn btn-success">Load countries</button><br /><br /><br />
+    <div id="countries"></div>
+    <div>
+      <form>
+        Name: <input type="text" /> Capital: <input type="text" /> Flag URL:
+        <input type="text" /> GDP: <input type="number" /> Population:
+        <input type="number" />
+        <button id="n" class="btn btn-warning">Add new country</button>
+      </form>
+    </div>
+
+    <script>
+      let countries = [];
+
+      var div = document.getElementById('countries');
+      document.querySelector('button').addEventListener('click', getData);
+
+      function getData(e) {
+        fetch('data.php')
+          .then((data) => data.json())
+          .then((data) => {
+            countries = data;
+            render();
+          });
+      }
+
+      function render() {
+        let items = countries;
+
+        var html = ``;
+
+        html += `
+        <table class='table table-striped'>
+            <tr>
+                <th>Name</th>
+                <th>Capital</th>
+                <th>FlagURL</th>
+                <th>Gdp</th>
+                <th>Population</th>
+            </tr>
+        `;
+
+        html += items
+          .map(
+            (item) => `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.capital}</td>
+                <td><img height=20 width=40 src="${item.flagURL}"></td>
+                <td>${item.gdp}</td>
+                <td>${item.population}</td>
+            </tr>
+        `
+          )
+          .join('');
+
+        html += `
+            </table>
+        `;
+
+        div.innerHTML = html;
+      }
+
+      document.getElementById('n').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        let country = {
+          name: document.forms[0].elements[0].value,
+          capital: document.forms[0].elements[1].value,
+          flagURL: document.forms[0].elements[2].value,
+          gdp: document.forms[0].elements[3].value,
+          population: document.forms[0].elements[4].value,
+        };
+
+        // trebalo bi fetch POST request na server i INSERT u bazu .then(() => countries.push(country))
+        countries.push(country);
+        render();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-8</title>
+
+    <style>
+      .komentar {
+        border: solid;
+        border-color: black;
+        border-width: 2px;
+        padding: 10px;
+        margin: 10px;
+        width: 500px;
+      }
+
+      .m {
+        border: solid;
+        border-color: red;
+        border-width: 2px;
+        padding: 10px;
+        margin: 10px;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="komentari"></div>
+
+    <script>
+      fetch('komentari.json')
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((komentari) => {
+          console.log(komentari);
+
+          divs = komentari.map((komentar) => {
+            let div = document.createElement('div');
+            div.classList.add('komentar');
+            div.innerHTML = `By ${komentar.autor} at ${komentar.vrijeme} <br/> ${komentar.komentar}`;
+            return div;
+          });
+
+          divs.forEach((div) =>
+            document.getElementById('komentari').appendChild(div)
+          );
+        });
+    </script>
+  </body>
+</html>

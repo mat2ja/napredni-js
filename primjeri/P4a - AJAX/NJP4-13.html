@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-13</title>
+  </head>
+
+  <body>
+    <input name="tekst" id="t" type="text" />
+    <div id="videos"></div>
+
+    <script>
+      var videos = document.getElementById('videos');
+      document.getElementById('t').addEventListener('keyup', getData);
+
+      function getData(e) {
+        url = `https://www.googleapis.com/youtube/v3/search?q=${e.target.value}&part=snippet&key=AIzaSyDAKDaBy_JDwcScSHqDQimOOLjdPImLanc`;
+
+        fetch(url)
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+            console.log(data);
+            render(data?.items || []);
+          });
+      }
+
+      function render(items) {
+        console.log(items);
+
+        videos.innerHTML = '';
+
+        items.forEach((item) => {
+          if (item.id.videoId != undefined) {
+            const title = document.createElement('h3');
+            title.innerHTML = item.snippet.title;
+            videos.appendChild(title);
+
+            const i = document.createElement('iframe');
+            i.src = `http://www.youtube.com/embed/${item.id.videoId}`;
+            videos.appendChild(i);
+
+            videos.appendChild(document.createElement('br'));
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

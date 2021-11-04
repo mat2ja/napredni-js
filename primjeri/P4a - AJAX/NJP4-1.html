@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-1</title>
+  </head>
+  <body>
+    <script>
+      //http://www.datchley.name/es6-promises/
+      //https://www.safaribooksonline.com/library/view/you-dont-know/9781491905197/ch04.html
+
+      function a() {
+        let out;
+
+        setTimeout(function () {
+          out = 'abc';
+        }, 2000);
+
+        return out;
+      }
+
+      let b = a();
+      console.log(b);
+    </script>
+  </body>
+</html>

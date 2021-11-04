@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-16</title>
+  </head>
+
+  <body>
+    <input name="tekst" id="t" type="text" />
+    <div id="reddits"></div>
+
+    <script>
+      var reddits = document.getElementById('reddits');
+      document.getElementById('t').addEventListener('keyup', getData);
+
+      function getData(e) {
+        url = `https://www.reddit.com/r/${e.target.value}/top.json?limit=20`;
+
+        fetch(url)
+          .then((data) => data.json())
+          .then((data) => render(data.data.children))
+          .catch((err) => console.log(err));
+      }
+
+      function render(items) {
+        console.log(items);
+
+        items = items
+          .map((item) => item.data)
+          .map((item) => {
+            if (item.thumbnail == undefined) item.thumbnail = '';
+
+            return /*html*/ `
+               <div style="border: 1px solid black; margin:5px">
+                ${item.score} 
+                (<a href="http://www.reddit.com${item.permalink}">${item.num_comments} comments</a>) 
+                <img src="${item.thumbnail}">
+                <a href="${item.url}">${item.title}</a><br/><br/>
+               </div>
+            `;
+          });
+
+        reddits.innerHTML = items.join('');
+      }
+    </script>
+  </body>
+</html>

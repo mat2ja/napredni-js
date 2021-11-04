@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-19</title>
+  </head>
+
+  <body>
+    <div id="q"></div>
+
+    <script>
+      // async/await novi ES8 feature
+
+      function a() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve(Math.random());
+          }, 2000);
+        });
+      }
+
+      async function b() {
+        try {
+          let b = await a();
+          let c = await a();
+          let d = await a();
+          console.log(b, c, d);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      b();
+
+      console.log('test');
+    </script>
+  </body>
+</html>

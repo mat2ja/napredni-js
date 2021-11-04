@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-9</title>
+
+    <style>
+      .komentar {
+        border: solid;
+        border-color: black;
+        border-width: 2px;
+        padding: 10px;
+        margin: 10px;
+        width: 500px;
+      }
+
+      .m {
+        border: solid;
+        border-color: red;
+        border-width: 2px;
+        padding: 10px;
+        margin: 10px;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="komentari"></div>
+
+    <script>
+      let komentari = [
+        {
+          autor: 'Marko',
+          komentar: 'Neki komentar',
+          vrijeme: '6. 4. 2017 16:00',
+        },
+        {
+          autor: 'Ivan',
+          komentar: 'Još neki komentar',
+          vrijeme: '7. 4. 2017 16:00',
+        },
+        {
+          autor: 'Petra',
+          komentar: 'Neki komentar 2',
+          vrijeme: '8. 4. 2017 16:00',
+        },
+        {
+          autor: 'Anja',
+          komentar: 'Neki komentar 3',
+          vrijeme: '9. 4. 2017 16:00',
+        },
+        {
+          autor: 'Tomislav',
+          komentar: 'Neki komentar 4',
+          vrijeme: '10. 4. 2017 16:00',
+        },
+        {
+          autor: 'Jana',
+          komentar: 'Neki komentar 5',
+          vrijeme: '11. 4. 2017 16:00',
+        },
+      ];
+
+      //  svaki komentar objekt pretvorimo u div objekt s odgovarajucim sadrzajem
+
+      /* divs = komentari.map((komentar)=>{
+
+        let div=document.createElement('div');
+        div.classList.add('komentar');
+        div.innerHTML=`By ${komentar.autor} at ${komentar.vrijeme} <br/> ${komentar.komentar}`;
+        return div;
+
+    });
+
+    console.log(divs);
+
+    divs.forEach((div)=>document.getElementById('komentari').appendChild(div));
+*/
+
+      // ili svaki komentar pretvorimo u string koji predstavlja zeljeni html
+
+      divs = komentari.map((komentar) => {
+        return /*html*/ `
+        <div class="komentar">
+            By ${komentar.autor} at ${komentar.vrijeme} <br/> ${komentar.komentar}
+        </div>
+        `;
+      });
+
+      console.log(divs);
+
+      document.getElementById('komentari').innerHTML = divs.join('');
+    </script>
+  </body>
+</html>

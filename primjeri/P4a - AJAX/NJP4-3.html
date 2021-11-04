@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-3</title>
+  </head>
+
+  <body>
+    <script>
+      function a(callback) {
+        setTimeout(function () {
+          callback('abc');
+        }, 2000);
+      }
+
+      function b(data, callback) {
+        setTimeout(function () {
+          callback(data + 'def');
+        }, 2000);
+      }
+
+      a(function (d1) {
+        b(d1, function (d2) {
+          console.log(d2);
+        });
+      });
+    </script>
+  </body>
+</html>

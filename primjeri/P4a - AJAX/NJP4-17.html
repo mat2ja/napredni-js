@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-17</title>
+
+    <style>
+      .box {
+        border: 1px solid black;
+        padding: 5px;
+        margin: 5px;
+        width: 150px;
+        height: 130px;
+        float: left;
+      }
+
+      img {
+        float: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input name="tekst" id="t" type="text" />
+    <div id="forecast"></div>
+
+    <script>
+      var forecast = document.getElementById('forecast');
+      document.getElementById('t').addEventListener('change', getData);
+      key = '27ca46efc64a33943e21624fe33aaa05';
+
+      function getData(e) {
+        fetch('city.list.json')
+          .then((data) => data.json())
+          .then((data) =>
+            data.filter(
+              (grad) => grad.name.toLowerCase() == e.target.value.toLowerCase()
+            )
+          )
+          .then((data) => data.map((data) => data.id))
+          .then((id) =>
+            fetch(
+              `http://api.openweathermap.org/data/2.5/forecast?id=${id[0]}&appid=${key}`
+            )
+          )
+          .then((data) => data.json())
+          .then((data) => render(data));
+      }
+
+      function render(items) {
+        console.log(items);
+        items = items.list;
+
+        items = items.map(
+          (item) => `
+
+            <div class="box">
+                ${item.dt_txt}
+                Temperatura = ${(item.main.temp - 273.15).toFixed(2)}<br/>
+                Vrijeme = ${item.weather[0].description}<br/>
+                Vjetar = ${item.wind.speed} m/s
+                <img src="http://openweathermap.org/img/w/${
+                  item.weather[0].icon
+                }.png"/>
+            </div>
+
+        `
+        );
+
+        forecast.innerHTML = items.join('');
+      }
+    </script>
+  </body>
+</html>

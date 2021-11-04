@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-4</title>
+  </head>
+  <body>
+    <script>
+      function a() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve('abc');
+          }, 2000);
+        });
+      }
+      let p = a();
+      p.then((d) => {
+        console.log('Data ' + d);
+      });
+    </script>
+  </body>
+</html>

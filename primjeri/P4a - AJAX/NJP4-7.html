@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-7</title>
+  </head>
+
+  <body>
+    <script>
+      function a() {
+        return new Promise(function (resolve, reject) {
+          if (Math.random() < 0.1) {
+            setTimeout(function () {
+              resolve('abc');
+            }, 1000);
+          } else reject('Dogodila se greska');
+        });
+      }
+
+      a()
+        .then((d) => {
+          return d + 'def';
+        })
+        .then((d) => {
+          console.log(d);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

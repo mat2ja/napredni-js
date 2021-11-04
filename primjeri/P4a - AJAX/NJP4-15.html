@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-14</title>
+  </head>
+
+  <body>
+    <input name="tekst" id="t" type="text" />
+    <div id="videos"></div>
+
+    <script>
+      var videos = document.getElementById('videos');
+      document
+        .getElementById('t')
+        .addEventListener('keyup', debounce(getData, 1000));
+
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+          var context = this,
+            args = arguments;
+          var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      }
+
+      function getData(e) {
+        url = `https://www.googleapis.com/youtube/v3/search?q=${e.target.value}&part=snippet&key=AIzaSyDAKDaBy_JDwcScSHqDQimOOLjdPImLanc`;
+
+        fetch(url, {
+          method: 'GET',
+          mode: 'cors',
+          redirect: 'follow',
+        })
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+            render(data.items);
+          });
+      }
+
+      function render(items) {
+        console.log(items);
+        items = items.map((item) => {
+          return `
+               <h3>${item.snippet.title}</h3>
+               <iframe src="http://www.youtube.com/embed/${item.id.videoId}"></iframe><br/>
+            `;
+        });
+
+        videos.innerHTML = items.join('');
+      }
+    </script>
+  </body>
+</html>

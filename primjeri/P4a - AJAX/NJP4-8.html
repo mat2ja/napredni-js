@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS10-8</title>
+  </head>
+
+  <body>
+    <script>
+      const a = 10;
+
+      const o = {
+        a: 123,
+        b: 'abc',
+        c: true,
+      };
+
+      const polje = [
+        { a: 5, b: 20 },
+        { a: 15, b: 20, d: 'abc' },
+        { a: [1, 2, 3], b: { sv1: 1, sv2: 2 } },
+      ];
+
+      const a2 = JSON.stringify(a);
+      const o2 = JSON.stringify(o);
+      const polje2 = JSON.stringify(polje);
+
+      console.log(a2);
+      console.log(typeof a2);
+      console.log(o2);
+      console.log(polje2);
+
+      const polje3 = JSON.parse(polje2);
+      console.log(polje3);
+    </script>
+  </body>
+</html>
