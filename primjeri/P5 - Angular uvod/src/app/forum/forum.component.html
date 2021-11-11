@@ -1,0 +1,10 @@
+<div class="well" style="width:400px" *ngFor="let komentar of komentari">
+  By {{komentar.autor}} at {{komentar.vrijeme}}<hr>
+  {{komentar.komentar}}
+</div>
+
+<div>
+  <input type="text" [(ngModel)]="new.autor"><br>
+  <textarea  [(ngModel)]="new.komentar"></textarea><br>
+  <button (click)="add()">Send comment</button>
+</div>

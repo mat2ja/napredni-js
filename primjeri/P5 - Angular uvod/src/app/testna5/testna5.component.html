@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let e of polje; let i=index">{{e}} <a href="#" (click)="onDelete(i)">x</a></li>
+</ul>
+<input type="text" [(ngModel)]="newName"><br>
+<button (click)="onAdd()" [disabled]="newName.length==0">Add</button>
+<br><br>
+<app-child [tekst]="'test'"></app-child>
+<app-child [tekst]="newName"></app-child>

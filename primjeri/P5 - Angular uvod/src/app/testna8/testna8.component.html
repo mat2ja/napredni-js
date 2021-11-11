@@ -1,0 +1,8 @@
+<br/>
+Unesite komentar:<br/>
+<div class="well">
+  <textarea [ngStyle]="komentar.length > 10 ? {'color':'green', 'fontSize':'20px'} : {'color':'red'}" class="form-control" rows="10" cols="10" [(ngModel)]="komentar"></textarea><br/>
+
+  <button [ngClass]="komentar.length > 20 ? 'btn btn-success' : 'btn btn-danger'" [disabled]="!komentar">Send!</button>
+  <button [ngClass]="dajKlasu()" [disabled]="!komentar">Send!</button>
+</div>
