@@ -1,21 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-testna',
-  templateUrl: './testna.component.html',
-  styleUrls: ['./testna.component.css']
+  selector: "app-testna",
+  templateUrl: "./testna.component.html",
+  styleUrls: ["./testna.component.css"],
 })
 export class TestnaComponent implements OnInit {
+  a = "Test";
 
-  a='Test';
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  metoda(){
+  metoda() {
     return 5;
   }
-
 }
