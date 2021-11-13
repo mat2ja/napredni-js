@@ -48,6 +48,11 @@ const showNewMovieInputs = () => {
   showElement(formNewMovie);
 };
 
+const hideNewMovieInputs = () => {
+  hideElement(formNewMovie);
+  showElement(formToggleBtn);
+};
+
 formToggleBtn.addEventListener('click', showNewMovieInputs);
 
 formNewMovie.addEventListener('submit', (e) => {
@@ -60,6 +65,7 @@ formNewMovie.addEventListener('submit', (e) => {
 
     addNewMovie(newMovieFields);
     clearFields(newMovieFields);
+    hideNewMovieInputs();
     resetFilters();
     initYearSelect();
     fillTable(movies);
