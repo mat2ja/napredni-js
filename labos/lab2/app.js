@@ -10,6 +10,8 @@ const refreshToggle = document.querySelector('#refresh-toggle');
 const formNewMovie = document.querySelector('#form-new-movie');
 const newMovieFields = [...formNewMovie.querySelectorAll('.form-control')];
 const formToggleBtn = document.querySelector('#form-toggle-btn');
+const table = document.querySelector('#movie-table');
+const tableBody = table.querySelector('tbody');
 
 const hideElement = (elem) => elem.classList.add('d-none');
 const showElement = (elem) => elem.classList.remove('d-none');
@@ -23,15 +25,17 @@ const applyFilters = () => {
 
   let filteredMovies = movies;
 
-  filteredMovies = selYear
-    ? filterMoviesByYear(filteredMovies, selYear)
-    : filteredMovies;
+  if (selYear) {
+    filteredMovies = filterMoviesByYear(filteredMovies, selYear);
+  }
 
   filteredMovies = reverseChecked
     ? filteredMovies.sort((a, b) => b.index - a.index)
     : filteredMovies.sort((a, b) => a.index - b.index);
 
-  filteredMovies = limit ? limitMovies(filteredMovies, limit) : filteredMovies;
+  if (limit) {
+    filteredMovies = limitMovies(filteredMovies, limit);
+  }
 
   fillTable(filteredMovies);
 };
@@ -67,6 +71,7 @@ formNewMovie.addEventListener('submit', (e) => {
     clearFields(newMovieFields);
     hideNewMovieInputs();
     resetFilters();
+    applyFilters();
     initYearSelect();
     fillTable(movies);
   } else {
@@ -80,7 +85,7 @@ const addNewMovie = (fields) => {
   const newMovie = {};
   fields.forEach(({ name, value }) => (newMovie[name] = value));
 
-  const maxIndex = Math.max(...movies.map((m) => m.index));
+  const maxIndex = movies.length ? Math.max(...movies.map((m) => m.index)) : 0;
   newMovie.index = maxIndex + 1;
 
   movies.push(newMovie);
@@ -110,6 +115,8 @@ const fetchMovies = async () => {
     if (movies.length) {
       initYearSelect();
       fillTable(movies);
+    } else {
+      movies = [];
     }
   } catch (err) {
     console.error(err.message);
@@ -123,9 +130,6 @@ const validateNewMovieFields = (inputs) => {
 };
 
 const fillTable = (movies) => {
-  const table = document.querySelector('#movie-table');
-  const tableBody = table.querySelector('tbody');
-
   const movieRows = movies
     .map((movie) => {
       const { index, name, year, rating, poster } = movie;
