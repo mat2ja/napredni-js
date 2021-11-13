@@ -1,4 +1,4 @@
-// https://full-women.surge.sh/
+// Deploy: https://full-women.surge.sh/
 
 let movies = [];
 
@@ -60,10 +60,13 @@ formNewMovie.addEventListener('submit', (e) => {
 
     addNewMovie(newMovieFields);
     clearFields(newMovieFields);
+    resetFilters();
     initYearSelect();
-    applyFilters();
+    fillTable(movies);
   } else {
-    newMovieFields.forEach(addElemError);
+    newMovieFields.forEach((elem) =>
+      elem.value.trim() ? removeElemErr(elem) : addElemError(elem)
+    );
   }
 });
 
@@ -152,9 +155,9 @@ const fillTable = (movies) => {
 };
 
 const deleteMovieByIndex = (targetIndex) => {
-  console.log(`Delete movie with index ${targetIndex}`);
   movies = movies.filter(({ index }) => index !== +targetIndex);
   fillTable(movies);
+  applyFilters();
 };
 
 const getUniqueMovieYears = () => {
