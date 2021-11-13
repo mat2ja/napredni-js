@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <tr>
+        <th>Naziv</th>
+        <th>Done</th>
+        <th>Check</th>
+        <th>Delete</th>
+      </tr>
+      <!--
+      <tr *ngFor="let todo of todos; let i = index;" *ngIf="!todo.done || showAll">
+        <td>{{todo.desc}}</td>
+        <td>{{todo.done}}</td>
+        <td>
+          <input type="checkbox" [(ngModel)]="todo.done">
+        </td>
+        <td>
+          <button class="btn btn-warning" (click)="deleteTodo(i)">Delete</button>
+        </td>
+      </tr> -->
+
+      <ng-container *ngFor="let todo of todos; let i = index">
+        <tr *ngIf="!todo.done || showAll">
+          <td>{{ todo.desc }}</td>
+          <td>{{ todo.done }}</td>
+          <td>
+            <input type="checkbox" [(ngModel)]="todo.done" />
+          </td>
+          <td>
+            <button class="btn btn-warning" (click)="deleteTodo(i)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+
+    <div>Show all: <input type="checkbox" [(ngModel)]="showAll" /></div>
+    <button class="btn btn-danger" (click)="clear()">Obriši dovršene</button>
+    <button class="btn btn-success" (click)="adding = !adding">
+      Dodaj novi
+    </button>
+    <div *ngIf="adding">
+      Upiši naziv<br />
+      <input type="text" [(ngModel)]="newTask" />
+      <button
+        class="btn btn-warning"
+        (click)="addTask()"
+        [disabled]="newTask.length == 0"
+      >
+        Dodaj
+      </button>
+    </div>
+  </div>
+</div>

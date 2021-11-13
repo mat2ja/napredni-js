@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let e of polje">{{ e }}</li>
+</ul>
+<input type="text" [(ngModel)]="newName" /><br />
+<button (click)="onAdd()">Add</button>

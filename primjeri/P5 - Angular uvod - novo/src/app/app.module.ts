@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { MojeComponent } from './moje/moje.component';
 import { TestnaComponent } from './testna/testna.component';
-import {FormsModule} from "@angular/forms";
 import { Testna2Component } from './testna2/testna2.component';
 import { Testna3Component } from './testna3/testna3.component';
 import { Testna4Component } from './testna4/testna4.component';
@@ -17,10 +17,10 @@ import { ForumComponent } from './forum/forum.component';
 import { TodoComponent } from './todo/todo.component';
 import { Todo2Component } from './todo2/todo2.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    MojeComponent,
     TestnaComponent,
     Testna2Component,
     Testna3Component,
@@ -32,13 +32,10 @@ import { Todo2Component } from './todo2/todo2.component';
     Testna8Component,
     ForumComponent,
     TodoComponent,
-    Todo2Component
+    Todo2Component,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule
-  ],
+  imports: [FormsModule, ReactiveFormsModule, BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

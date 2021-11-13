@@ -1,0 +1,21 @@
+.blue {
+  color: lightskyblue;
+}
+
+.red {
+  color: #e53935;
+}
+
+.btn {
+  border: none;
+  font: inherit;
+  padding: 0.4em 1.2em;
+  border-radius: 6px;
+  color: #424242;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #eeeeee;
+}

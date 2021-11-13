@@ -1,0 +1,16 @@
+<input type="text" [(ngModel)]="name" />
+<h1>{{ name }}</h1>
+<button class="btn" (click)="printEvent($event)">Klikni me</button>
+<pre *ngIf="clickEvent">{{ clickEvent }}</pre>
+
+<ul>
+  <li *ngFor="let ime of imena; let i = index">{{ ime }} → {{ i }}.</li>
+</ul>
+
+<h1>Count</h1>
+<h3 class="blue" *ngIf="counter <= 5; else moreThan">{{ counter }}</h3>
+<ng-template #moreThan>
+  <h3 class="red">{{ counter }} is more than 5</h3>
+</ng-template>
+
+<button class="btn" (click)="increment()">Increment counter</button>

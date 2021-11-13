@@ -1,0 +1,9 @@
+<form>
+  <input type="text" name="test" *ngIf="a != 10" [(ngModel)]="a" /><br />
+  <span *ngIf="a == 1; else x"
+    >1. div se prikazuje kada je u upisana brojka 1</span
+  >
+  <span *ngIf="a == 2"> → 2. div</span>
+  <span *ngIf="a == 3"> → 3. div</span>
+  <ng-template #x>Ako nije 1</ng-template>
+</form>
