@@ -1,0 +1,37 @@
+<div class="card post" *ngIf="post">
+  <div class="card-header">
+    <p>
+      by <span class="user">{{ post.user }}</span> at
+      <span class="timestamp">{{ post.timestamp.toUTCString() }}</span>
+    </p>
+  </div>
+  <div class="card-body">
+    <div class="comment" *ngIf="!editMode">
+      {{ post.comment }}
+    </div>
+    <textarea *ngIf="editMode" [(ngModel)]="editedComment" class="form-control">
+      {{ editedComment }}
+    </textarea>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-danger" (click)="deletePost(post)">
+      Delete
+    </button>
+    <button
+      *ngIf="!editMode"
+      type="button"
+      class="btn btn-success ms-2"
+      (click)="setEditMode(true)"
+    >
+      Edit
+    </button>
+    <button
+      *ngIf="editMode"
+      type="button"
+      class="btn btn-warning ms-2"
+      (click)="setEditMode(false); editPost(post.timestamp)"
+    >
+      Done editing
+    </button>
+  </div>
+</div>
