@@ -14,3 +14,5 @@ import { NewPostComponent } from './new-post/new-post.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// https://angular-forum.vercel.app/
