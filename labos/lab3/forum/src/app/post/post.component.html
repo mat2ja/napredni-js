@@ -1,8 +1,10 @@
 <div class="card post" *ngIf="post">
   <div class="card-header">
     <p>
-      by <span class="user">{{ post.user }}</span> at
-      <span class="timestamp">{{ post.timestamp.toUTCString() }}</span>
+      by <span class="user text-primary">{{ post.user }}</span> at
+      <span class="timestamp text-primary">{{
+        post.timestamp.toUTCString()
+      }}</span>
     </p>
   </div>
   <div class="card-body">
@@ -10,11 +12,14 @@
       {{ post.comment }}
     </div>
     <textarea *ngIf="editMode" [(ngModel)]="editedComment" class="form-control">
-      {{ editedComment }}
     </textarea>
   </div>
   <div class="card-footer">
-    <button type="button" class="btn btn-danger" (click)="deletePost(post)">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="deletePost(post.timestamp)"
+    >
       Delete
     </button>
     <button

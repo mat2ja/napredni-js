@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { PostModel } from '../posts/posts.component';
+import { Post } from '../posts/posts.component';
 
 @Component({
   selector: 'app-post',
@@ -7,7 +7,7 @@ import { PostModel } from '../posts/posts.component';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  @Input() post: PostModel | null = null;
+  @Input() post: Post | null = null;
   @Input() editMode: boolean = false;
   @Output() deletedPost = new EventEmitter();
   @Output() editedPost = new EventEmitter();
@@ -18,10 +18,13 @@ export class PostComponent implements OnInit {
 
   setEditMode(bool: boolean) {
     this.editMode = bool;
+    if (this.editMode && this.post?.comment) {
+      this.editedComment = this.post?.comment;
+    }
   }
 
-  deletePost(post: PostModel) {
-    this.deletedPost.emit(post);
+  deletePost(postTs: Date) {
+    this.deletedPost.emit(postTs);
   }
 
   editPost(postTs: Date) {
