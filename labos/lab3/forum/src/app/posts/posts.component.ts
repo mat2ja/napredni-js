@@ -16,14 +16,14 @@ export class PostsComponent implements OnInit {
 
   posts: Post[] = [
     {
-      user: 'marian',
-      timestamp: new Date('2021-11-17 02:28:14'),
-      comment: 'prvi!!!!11',
-    },
-    {
       user: 'matija',
       timestamp: new Date('2021-11-19 22:30:21'),
       comment: 'idemo delati',
+    },
+    {
+      user: 'marian',
+      timestamp: new Date('2021-11-17 02:28:14'),
+      comment: 'prvi!!!!11',
     },
   ];
 

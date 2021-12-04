@@ -1,0 +1,45 @@
+<section>
+  <div class="mb-3">
+    <label for="smjer-input" class="form-label">
+      Popis studenata na smjeru (po semestru)
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      id="smjer-input"
+      [(ngModel)]="semestarQuery"
+    />
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="pointer" scope="col" (click)="setSort('ime')">Ime</th>
+        <th class="pointer" scope="col" (click)="setSort('prosjek')">
+          Prosjek
+        </th>
+        <th class="pointer" scope="col" (click)="setSort('semestar')">
+          Semestar
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let student of students
+            | semestar
+            | filter: 'semestar':semestarQuery
+            | sorting: sortField
+        "
+      >
+        <th>
+          <a [routerLink]="['student', student.jmbag]">{{
+            student.ime | titlecase
+          }}</a>
+        </th>
+        <th>{{ student.prosjek }}</th>
+        <th>{{ student.semestar }}</th>
+      </tr>
+    </tbody>
+  </table>
+</section>

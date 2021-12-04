@@ -1,0 +1,12 @@
+<div *ngIf="country">
+  <h1>{{country.name}}</h1>
+  <ul>
+
+    <li>Flag:<img [src]="country.flagURL" width=100/></li>
+    <li>Population: {{country.population | number}}</li>
+    <li>Capital: {{country.capital}} </li>
+    <li>GDP: {{country.gdp | currency }}</li>
+
+  </ul>
+</div>
+<span *ngIf="!country">Country not selected</span>

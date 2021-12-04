@@ -1,0 +1,22 @@
+<input [(ngModel)]="query" type="text" />
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Population</th>
+    <th>Capital</th>
+  </tr>
+  <tr
+    *ngFor="
+      let country of countries | filter: 'name':query | sorting: 'population'
+    "
+  >
+    <td>
+      <button (click)="selectedCountry = country">{{ country.name }}</button>
+    </td>
+    <td>{{ country.population }}</td>
+    <td>{{ country.capital }}</td>
+  </tr>
+</table>
+<div *ngIf="selectedCountry">
+  <app-country-detail [country]="selectedCountry"></app-country-detail>
+</div>

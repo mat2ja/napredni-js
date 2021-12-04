@@ -1,0 +1,24 @@
+<input [(ngModel)]="query" type="text" />
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Population</th>
+    <th>Duplo</th>
+    <th>Capital</th>
+  </tr>
+  <tr
+    *ngFor="
+      let country of countries
+        | mnozi
+        | filter: 'name':query
+        | sorting: 'population'
+    "
+  >
+    <td>
+      <a [routerLink]="[country.name]">{{ country.name }}</a>
+    </td>
+    <td>{{ country.population }}</td>
+    <td>{{ country.duplo }}</td>
+    <td>{{ country.capital }}</td>
+  </tr>
+</table>

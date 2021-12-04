@@ -1,0 +1,9 @@
+.pointer {
+  cursor: pointer;
+  user-select: none;
+}
+
+.pointer:hover {
+  color: #43a047;
+  background: #e8f5e9;
+}

@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>datum</th>
+    <th>money</th>
+  </tr>
+  <tr *ngFor="let obj of data">
+    <td>{{ obj.id }}</td>
+    <td>{{ obj.name | uppercase }}</td>
+    <td>{{ obj.datum | date: "MM/dd/yyyy @ h:mma" }}</td>
+    <td>{{ obj.money | currency }}</td>
+  </tr>
+</table>

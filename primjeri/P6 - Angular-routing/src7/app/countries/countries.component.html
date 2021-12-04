@@ -1,0 +1,17 @@
+<input type="number" [(ngModel)]="ocjena.value" />
+<select [(ngModel)]="ocjena.kolegij">
+  <option *ngFor="let kolegij of kolegiji" [value]="kolegij.naziv">
+    {{ kolegij.naziv }}
+  </option>
+</select>
+<button (click)="dodajOcjenu()">Dodaj ocjenu</button><br /><br />
+<table>
+  <tr>
+    <th>Naziv</th>
+    <th>Prosjek</th>
+  </tr>
+  <tr *ngFor="let kolegij of kolegiji | prosjek">
+    <td>{{ kolegij.naziv }}</td>
+    <td>{{ kolegij.prosjek.toFixed(2) }}</td>
+  </tr>
+</table>
