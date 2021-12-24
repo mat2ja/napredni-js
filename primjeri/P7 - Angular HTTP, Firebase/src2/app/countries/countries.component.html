@@ -1,0 +1,38 @@
+<input [(ngModel)]="query" type="text" />
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Population</th>
+    <th>Capital</th>
+  </tr>
+  <tr
+    *ngFor="
+      let country of countries | filter: 'name':query | sorting: 'population'
+    "
+  >
+    <td>
+      <a [routerLink]="[country.name]">{{ country.name }}</a>
+    </td>
+    <td>{{ country.population }}</td>
+    <td>{{ country.capital }}</td>
+  </tr>
+</table>
+
+<button (click)="add = !add">Add new country!</button><br />
+
+<div *ngIf="add">
+  Add country:<br />
+  Name:<br />
+  <input type="text" [(ngModel)]="new.name" /><br />
+  Population:<br />
+  <input type="text" [(ngModel)]="new.population" /><br />
+  Flag URL:<br />
+  <input type="text" [(ngModel)]="new.flagURL" /><br />
+  Capital:<br />
+  <input type="text" [(ngModel)]="new.capital" /><br />
+  GDP:<br />
+  <input type="text" [(ngModel)]="new.gdp" /><br />
+  <br />
+
+  <button (click)="addCountry()">Add</button>
+</div>

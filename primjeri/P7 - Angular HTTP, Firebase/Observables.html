@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observables primjer</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@6.0.0/dist/global/rxjs.umd.js"></script>
+</head>
+<body>
+<button>Show</button>
+<output></output>
+
+<script>
+
+    const output = document.querySelector('output');
+    const button = document.querySelector('button');
+
+    console.log(rxjs);
+/*
+    rxjs
+        .fromEvent(button, 'click')
+        .pipe(rxjs.operators.map((e)=> e.pageX))
+        .subscribe((x) => {
+            output.innerHTML = x;
+        });
+*/
+
+/*
+    rxjs.interval(1000)
+        .subscribe(res => {
+            console.log(res);
+        });
+*/
+
+/*
+    let custom = rxjs.Observable.create(observer => {
+
+        let count = 0;
+        setInterval(()=>{
+            observer.next(count);
+            count++;
+            if (count==4) observer.complete('completed');
+            if (count>5) observer.error('error');
+        },1000)
+
+    });
+
+    custom
+        .subscribe(res => {
+            console.log(res);
+        },error => {
+            console.log(error);
+        },() => {
+            console.log('done');
+        });
+
+
+*/
+
+
+    //https://www.zartis.com/untethering-webapps-with-observables-rxjs/
+    //https://medium.com/simars/rxjs-create-your-own-observables-directly-from-event-sources-2b7c96170e17
+
+
+
+
+    const click$ = rxjs.fromEvent(button, 'click');
+
+    click$
+        .pipe(
+            rxjs.operators.debounceTime(2000),
+            rxjs.operators.delay(1000)
+        )
+        .subscribe((res) => {
+            output.innerHTML = Math.random();
+        });
+
+
+
+    // https://rxjs-dev.firebaseapp.com/api/operators
+
+</script>
+
+</body>
+</html>

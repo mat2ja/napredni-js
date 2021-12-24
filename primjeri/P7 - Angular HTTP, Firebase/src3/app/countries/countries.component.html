@@ -1,0 +1,54 @@
+<input [(ngModel)]="query" type="text"/>
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>#</th>
+    <th>Country</th>
+    <th>Flag</th>
+    <th>Population</th>
+    <th>Capital</th>
+    <th>GDP</th>
+    <th>DELETE</th>
+
+  </tr>
+  <tr *ngFor="let country of countries | filter: 'name' : query | sorting : 'population'; let i=index;">
+    <td>{{i+1}}</td>
+    <td><a [routerLink]="[country.name]">{{country.name}}</a></td>
+    <td><img height=25 [src]="country.flagURL"></td>
+    <td>{{country.population}}</td>
+    <td>{{country.capital}}</td>
+    <td>{{country.gdp}}</td>
+    <td><button class="btn btn-danger" (click)="deleteCountry(i)">Delete</button></td>
+  </tr>
+</table>
+
+
+<button class="btn btn-success" (click)="add=!add">Add new country!</button><br/>
+
+<div class="well row" *ngIf="add">
+
+  <div class="col-md-4">
+    <fieldset class="form-group">
+      <label>Name:</label>
+      <input class="form-control" type="text" [(ngModel)]="new.name"/>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Population</label>
+      <input class="form-control" type="text" [(ngModel)]="new.population"/>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Flag URL</label>
+      <input class="form-control" type="text" [(ngModel)]="new.flagURL"/>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Capital</label>
+      <input class="form-control" type="text" [(ngModel)]="new.capital"/>
+    </fieldset>
+    <fieldset class="form-group">
+      <label>GDP</label>
+      <input class="form-control" type="text" [(ngModel)]="new.gdp"/>
+    </fieldset>
+    <button class="btn btn-success" (click)="addCountry()">Add</button>
+  </div>
+
+</div>
+
