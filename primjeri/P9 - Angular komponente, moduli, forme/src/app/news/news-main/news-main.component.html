@@ -1,0 +1,8 @@
+<app-news-form4 [in]="in" (onNews)="addNews($event)"></app-news-form4>
+
+<div>News:</div>
+<div *ngFor="let n of allNews">
+  {{ n.tekst }}
+</div>
+
+<input type="text" [(ngModel)]="in" />
