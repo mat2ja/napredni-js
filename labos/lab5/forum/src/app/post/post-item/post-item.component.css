@@ -1,0 +1,18 @@
+.user {
+  font-weight: 500;
+}
+
+.card-header p {
+  margin-bottom: 0;
+}
+
+.timestamp {
+  font-weight: 500;
+}
+
+.comment,
+textarea {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+}

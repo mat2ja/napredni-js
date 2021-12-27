@@ -1,0 +1,10 @@
+<h2>Posts ({{ posts.length }}):</h2>
+<section class="posts">
+  <app-post-item
+    *ngFor="let post of posts"
+    [post]="post"
+    (deletedPost)="deletePost($event)"
+    (editedPost)="editPost($event)"
+  ></app-post-item>
+  <app-post-new (addedPost)="addPostNew($event)"></app-post-new>
+</section>
