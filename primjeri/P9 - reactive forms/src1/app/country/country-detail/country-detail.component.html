@@ -1,0 +1,15 @@
+<div *ngIf="name">
+  <h1>{{country.name}}</h1>
+  <ul *ngIf="country">
+
+    <li>Flag:<img [src]="country.flagURL" width=100/></li>
+    <li>Population: {{country.population | number}}</li>
+    <li>Capital: {{country.capital}} </li>
+    <li>GDP: {{country.gdp | currency }}</li>
+
+  </ul>
+  <span *ngIf="!country">Country doesn't exist</span>
+</div>
+<div>
+  <a [routerLink]="['']">Back</a>
+</div>

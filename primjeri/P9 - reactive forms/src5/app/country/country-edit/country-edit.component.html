@@ -1,0 +1,33 @@
+<div class="well">
+    <div class="col-md-4">
+        <form [formGroup]="countryForm" (submit)="onSubmit()">
+            <fieldset class="form-group">
+                <label>Name:</label>
+                <input class="form-control" type="text" formControlName="name"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Population</label>
+                <input class="form-control" type="text" formControlName="population"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Flag URL</label>
+                <input class="form-control" type="text" formControlName="flagURL"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Capital</label>
+                <input class="form-control" type="text" formControlName="capital"/>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>GDP</label>
+                <input class="form-control" type="text" formControlName="gdp"/>
+            </fieldset>
+            <input type="submit" *ngIf="mode=='add'" class="btn btn-success" [disabled]="!countryForm.valid">
+            {{mode=='add' ? 'Add':'Edit'}}
+
+        </form>
+    </div>
+    <div>
+
+        <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    </div>
+</div>

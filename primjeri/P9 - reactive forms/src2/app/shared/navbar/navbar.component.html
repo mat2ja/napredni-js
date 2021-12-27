@@ -1,0 +1,9 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div collapse navbar-collapse>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" [ngClass]="getClass('/')"><a class="nav-link" [routerLink]="['']">Home</a></li>
+            <li class="nav-item" [ngClass]="getClass('/about')"><a class="nav-link" [routerLink]="['about']">About</a></li>
+            <li class="nav-item" [ngClass]="getClass('/news')"><a class="nav-link" [routerLink]="['news']">News</a></li>
+        </ul>
+    </div>
+</nav>

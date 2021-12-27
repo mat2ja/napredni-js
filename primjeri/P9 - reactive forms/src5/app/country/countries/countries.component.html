@@ -1,0 +1,36 @@
+<div *ngIf="user.username">
+  Welcome, {{user.username}}!
+</div>
+<br><br>
+<input [(ngModel)]="query" type="text"/>
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>#</th>
+    <th>Country</th>
+    <th>Flag</th>
+    <th>Population</th>
+    <th>Capital</th>
+    <th>GDP</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+
+  </tr>
+  <tr *ngFor="let country of countries | filter: 'name' : query | sorting : 'population'; let i=index;">
+    <td>{{i+1}}</td>
+
+    <td><a [routerLink]="[country.name]">{{country.name}}</a></td>
+    <td ><img height=25 [src]="country.flagURL"></td>
+    <td>{{country.population}}</td>
+    <td appHighlight>{{country.capital}}</td>
+    <td>{{country.gdp}}</td>
+
+    <td><button class="btn btn-info" (click)="startEditing(country)">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="deleteCountry(i)">Delete</button></td>
+  </tr>
+</table>
+
+
+<button class="btn btn-success" (click)="startAdding()">Add new country!</button><br/>
+
+<app-country-edit [country]="selectedCountry" [mode]="mode" *ngIf="mode!=''"
+                  (cancelEvent)="onCancel()"></app-country-edit>
