@@ -1,0 +1,58 @@
+<h1>🧓️ Register Form</h1>
+<form class="mt-4">
+  <div>
+    <div>
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Enter your username"
+      />
+    </div>
+    <div class="mt-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter your password"
+      />
+    </div>
+    <div class="mt-3">
+      <label for="repeated-password" class="form-label"
+        >Repeated password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="repeated-password"
+        placeholder="Enter your repeated password"
+      />
+    </div>
+    <div class="mt-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="name"
+        class="form-control"
+        id="name"
+        placeholder="Enter your name"
+      />
+    </div>
+    <div class="mt-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Enter your email"
+      />
+    </div>
+  </div>
+  <div class="mt-3">
+    <button type="submit" class="btn btn-success" disabled>Register!</button>
+  </div>
+  <div class="mt-5">
+    <a [routerLink]="['', 'login']">Back to login form</a>
+  </div>
+</form>
