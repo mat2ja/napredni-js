@@ -24,7 +24,7 @@ export class PostNewComponent implements OnInit {
     this.formShown = false;
   }
 
-  addPost(e: Event) {
+  submitPost(e: Event) {
     e.preventDefault();
     if (this.user.length && this.comment.length) {
       const PostNew: Post = {

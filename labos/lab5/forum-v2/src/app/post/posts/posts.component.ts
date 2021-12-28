@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { PostService } from './../post.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import Post from '../post.model';
 
 @Component({
@@ -6,40 +9,36 @@ import Post from '../post.model';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
 })
-export class PostsComponent implements OnInit {
-  constructor() {}
-
-  posts: Post[] = [
-    {
-      user: 'matija',
-      timestamp: new Date('2021-11-19 22:30:21'),
-      comment: 'idemo delati',
-    },
-    {
-      user: 'marian',
-      timestamp: new Date('2021-11-17 02:28:14'),
-      comment: 'prvi!!!!11',
-    },
-  ];
+export class PostsComponent implements OnInit, OnDestroy {
+  posts: Post[] = [];
+  postsSubject: BehaviorSubject<Post[]>;
+  subscription: Subscription;
 
   addPost(post: Post) {
-    this.posts.unshift(post);
+    this.postService.addPost(post);
   }
 
   deletePost(postTs: Date) {
-    this.posts = this.posts.filter((post) => post.timestamp !== postTs);
+    console.log('deletePost', postTs);
+    this.postService.deletePost(postTs);
   }
 
-  editPost({ postTs, editedComment }: { postTs: Date; editedComment: string }) {
-    const post = this.posts.find((post) => post.timestamp === postTs);
-    if (post) {
-      post.comment = editedComment;
-    }
+  editPost(payload: { postTs: Date; editedComment: string }) {
+    this.postService.editPost(payload);
   }
 
-  addPostNew(post: Post) {
-    this.posts.unshift(post);
+  constructor(private postService: PostService) {}
+
+  ngOnInit() {
+    // observable
+    this.postsSubject = this.postService.getPosts();
+    // kada se postSubject promijeni, updajtaj i posts (prati promjene)
+    this.subscription = this.postsSubject.subscribe((res) => {
+      this.posts = res;
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

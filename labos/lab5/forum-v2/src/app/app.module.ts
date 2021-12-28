@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { PostItemComponent } from './post/post-item/post-item.component';
 import { PostsComponent } from './post/posts/posts.component';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,13 @@ import { PostNewComponent } from './post/post-new/post-new.component';
     LoginComponent,
     RegisterComponent,
   ],
-  imports: [BrowserModule, RouterModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

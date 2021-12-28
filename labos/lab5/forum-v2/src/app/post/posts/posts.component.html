@@ -1,3 +1,8 @@
+<div class="d-flex mb-4">
+  <a [routerLink]="['login']">Login</a>
+  <a class="ms-3" [routerLink]="['register']">Register</a>
+</div>
+
 <h2>Posts ({{ posts.length }}):</h2>
 <section class="posts">
   <app-post-item
@@ -6,5 +11,5 @@
     (deletedPost)="deletePost($event)"
     (editedPost)="editPost($event)"
   ></app-post-item>
-  <app-post-new (addedPost)="addPostNew($event)"></app-post-new>
+  <app-post-new (addedPost)="addPost($event)"></app-post-new>
 </section>
