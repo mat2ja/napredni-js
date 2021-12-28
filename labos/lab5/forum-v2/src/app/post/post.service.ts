@@ -6,7 +6,18 @@ import Post from './post.model';
   providedIn: 'root',
 })
 export class PostService {
-  posts: Post[] = [];
+  posts: Post[] = [
+    {
+      user: 'matija',
+      timestamp: new Date('2021-11-19 22:30:21'),
+      comment: 'idemo delati',
+    },
+    {
+      user: 'marian',
+      timestamp: new Date('2021-11-17 02:28:14'),
+      comment: 'prvi!!!!11',
+    },
+  ];
   postsSubject: BehaviorSubject<Post[]>;
 
   constructor() {
@@ -14,19 +25,7 @@ export class PostService {
   }
 
   init() {
-    this.postsSubject = new BehaviorSubject([
-      {
-        user: 'matija',
-        timestamp: new Date('2021-11-19 22:30:21'),
-        comment: 'idemo delati',
-      },
-      {
-        user: 'marian',
-        timestamp: new Date('2021-11-17 02:28:14'),
-        comment: 'prvi!!!!11',
-      },
-    ]);
-    this.postsSubject.subscribe((res) => (this.posts = res));
+    this.postsSubject = new BehaviorSubject(this.posts);
   }
 
   getPosts() {
@@ -35,13 +34,13 @@ export class PostService {
 
   addPost(post: Post) {
     // obavi logiku na lokalnom arrayu
-    this.posts.unshift(post);
+    this.posts = [post, ...this.posts];
     // dojavi tu promjenu na postSubjectu (tko god je subscriban na to)
     this.postsSubject.next(this.posts);
   }
 
   editPost({ postTs, editedComment }: { postTs: Date; editedComment: string }) {
-    const post = this.posts.find((post) => post.timestamp === postTs);
+    const post = this.getPostByTimestamp(postTs);
     if (post) {
       post.comment = editedComment;
     }
@@ -49,8 +48,11 @@ export class PostService {
   }
 
   deletePost(postTs: Date) {
-    console.log('delete filter');
-    this.posts = this.posts.filter((post) => post.timestamp !== postTs);
+    this.posts = this.posts.filter(({ timestamp }) => timestamp !== postTs);
     this.postsSubject.next(this.posts);
+  }
+
+  getPostByTimestamp(postTs: Date) {
+    return this.posts.find(({ timestamp }) => timestamp === postTs);
   }
 }

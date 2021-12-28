@@ -19,7 +19,6 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   deletePost(postTs: Date) {
-    console.log('deletePost', postTs);
     this.postService.deletePost(postTs);
   }
 

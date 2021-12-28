@@ -23,7 +23,6 @@ export class CountryService {
 
   getCountries() {
     return this.countrySubject;
-    //  return this.countries;
   }
 
   addCountry(country) {
