@@ -1,11 +1,11 @@
+import { UserBase } from './../auth.model';
+import { User, UserRegister } from '../auth.model';
+import { AuthService } from '../auth.service';
 import {
   FormGroup,
   FormControl,
   Validators,
   ValidatorFn,
-  AbstractControl,
-  ValidationErrors,
-  FormBuilder,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
       : { mismatch: true };
   }
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -52,5 +52,14 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     console.log(this.registerForm);
+    const { username, password, name, email } = this.registerForm
+      .value as UserRegister;
+    const userData: UserBase = {
+      username,
+      password,
+      name,
+      email,
+    };
+    this.auth.register(userData);
   }
 }

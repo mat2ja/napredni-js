@@ -3,12 +3,17 @@
     type="button"
     class="btn"
     (click)="formShown = !formShown"
-    [ngClass]="formShown ? 'btn-outline-primary' : 'btn-primary'"
+    [ngClass]="formShown ? 'btn-outline-secondary' : 'btn-primary'"
   >
-    {{ formShown ? "Exit" : "Add new post" }}
+    {{ formShown ? "Exit form" : "Add new post" }}
   </button>
 </div>
-<form *ngIf="formShown" name="post-new" (submit)="submitPost($event)" class="mt-3">
+<form
+  *ngIf="formShown"
+  name="post-new"
+  (submit)="submitPost($event)"
+  class="mt-3"
+>
   <div class="input-group mb-2">
     <span class="input-group-text" id="basic-addon1">User</span>
     <input

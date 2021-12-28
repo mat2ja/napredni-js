@@ -1,7 +1,6 @@
 import { PostBase } from './../post.model';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { PostService } from './../post.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../post.model';
 
