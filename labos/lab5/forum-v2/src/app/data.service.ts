@@ -1,4 +1,4 @@
-import { User, UserBase } from './auth/auth.model';
+import { UserBase } from './auth/auth.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post, PostBase } from './post/post.model';
@@ -13,6 +13,7 @@ export class DataService {
     users: 'users',
     posts: 'posts',
   };
+
   constructor(private http: HttpClient) {}
 
   getPosts() {

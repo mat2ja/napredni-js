@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -8,6 +9,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  errorMessage: string | null = null;
+
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [
       Validators.required,
@@ -21,9 +24,14 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.errorEmitter.subscribe((error: string | null) => {
+      this.errorMessage = error;
+    });
+  }
 
   onLogin() {
     console.log(this.loginForm);
+    this.auth.login(this.loginForm.value);
   }
 }

@@ -1,6 +1,24 @@
-<div class="d-flex mb-4">
+<div class="mb-4" *ngIf="!authenticated">
   <a [routerLink]="['login']">Login</a>
   <a class="ms-3" [routerLink]="['register']">Register</a>
+</div>
+
+<div
+  class="d-flex justify-content-between align-items-start mb-4"
+  *ngIf="authenticated && user"
+>
+  <p>
+    Welcome
+    <a [routerLink]="['']" class="text-primary user-name">{{ user.name }}</a>
+    <span class="ms-1 text-secondary" class="ms-1 text-secondary user-email"
+      >({{ user.email }})</span
+    >
+  </p>
+  <div *ngIf="authenticated" class="d-flex justify-content-end w-full">
+    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">
+      Logout
+    </button>
+  </div>
 </div>
 
 <h2>🦜️ Posts ({{ posts.length }}):</h2>

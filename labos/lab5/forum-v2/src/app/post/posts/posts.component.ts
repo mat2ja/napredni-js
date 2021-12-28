@@ -1,3 +1,5 @@
+import { AuthService } from './../../auth/auth.service';
+import { User } from './../../auth/auth.model';
 import { PostBase } from './../post.model';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { PostService } from './../post.service';
@@ -10,9 +12,12 @@ import { Post } from '../post.model';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit, OnDestroy {
+  user: User | null;
+  authenticated = false;
   posts: Post[] = [];
   postsSubject: BehaviorSubject<Post[]>;
-  subscription: Subscription;
+  postsSubscription: Subscription;
+  authChangeSubscription: Subscription;
 
   addPost(post: PostBase) {
     this.postService.addPost(post);
@@ -26,16 +31,30 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.postService.editPost(post);
   }
 
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit() {
+    this.user = this.auth.getUser();
+    this.authenticated = this.auth.isAuthenticated();
+
     this.postsSubject = this.postService.getPosts();
-    this.subscription = this.postsSubject.subscribe((res) => {
+    this.postsSubscription = this.postsSubject.subscribe((res) => {
       this.posts = res;
+    });
+
+    this.authChangeSubscription = this.auth.authChange.subscribe((res) => {
+      this.authenticated = this.auth.isAuthenticated();
+      this.user = this.auth.getUser();
     });
   }
 
+  logout() {
+    console.log('logout :>> ');
+    this.auth.logout();
+  }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.postsSubscription.unsubscribe();
+    this.authChangeSubscription.unsubscribe();
   }
 }

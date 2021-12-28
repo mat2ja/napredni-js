@@ -27,10 +27,9 @@ export class PostService {
 
   addPost(post: PostBase) {
     this.dataService.addPost(post).subscribe((res: any) => {
-      const { id } = res;
-      const newPost = { id, ...post };
+      const newPost = { id: res.id, ...post };
 
-      this.posts = [newPost, ...this.posts];
+      this.posts.unshift(newPost);
       this.postsSubject.next(this.posts);
     });
   }
