@@ -9,6 +9,7 @@ import Post from '../post.model';
 export class PostItemComponent implements OnInit {
   @Input() post: Post | null = null;
   @Input() editMode: boolean = false;
+
   @Output() deletedPost = new EventEmitter();
   @Output() editedPost = new EventEmitter();
 

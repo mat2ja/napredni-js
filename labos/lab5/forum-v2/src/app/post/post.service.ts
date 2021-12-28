@@ -1,3 +1,4 @@
+import { DataService } from './../data.service';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import Post from './post.model';
@@ -20,7 +21,7 @@ export class PostService {
   ];
   postsSubject: BehaviorSubject<Post[]>;
 
-  constructor() {
+  constructor(private dataService: DataService) {
     this.init();
   }
 
@@ -43,8 +44,8 @@ export class PostService {
     const post = this.getPostByTimestamp(postTs);
     if (post) {
       post.comment = editedComment;
+      this.postsSubject.next(this.posts);
     }
-    this.postsSubject.next(this.posts);
   }
 
   deletePost(postTs: Date) {
