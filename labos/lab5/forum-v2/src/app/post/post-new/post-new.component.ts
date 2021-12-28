@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import Post from '../post.model';
+import { Post, PostBase } from '../post.model';
 
 @Component({
   selector: 'app-post-new',
@@ -27,12 +27,12 @@ export class PostNewComponent implements OnInit {
   submitPost(e: Event) {
     e.preventDefault();
     if (this.user.length && this.comment.length) {
-      const PostNew: Post = {
+      const newPost: PostBase = {
         user: this.user,
         comment: this.comment,
         timestamp: new Date(),
       };
-      this.addedPost.emit(PostNew);
+      this.addedPost.emit(newPost);
       this.clearForm();
       this.error = '';
     } else {

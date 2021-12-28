@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import Post from '../post.model';
+import { Post } from '../post.model';
 
 @Component({
   selector: 'app-post-item',
@@ -24,15 +24,22 @@ export class PostItemComponent implements OnInit {
     }
   }
 
-  deletePost(postTs: Date) {
-    this.deletedPost.emit(postTs);
+  deletePost(id: string) {
+    this.deletedPost.emit(id);
   }
 
-  editPost(postTs: Date) {
-    this.editedPost.emit({
-      postTs,
-      editedComment: this.editedComment,
-    });
+  editPost(post: Post) {
+    this.post = { ...post, comment: this.editedComment };
+    this.editedPost.emit(this.post);
+    this.editMode = false;
+  }
+
+  cancelEdit() {
+    this.editMode = false;
+  }
+
+  formatTimestamp(ts: Date) {
+    return new Date(ts).toLocaleString('de');
   }
 
   ngOnInit(): void {

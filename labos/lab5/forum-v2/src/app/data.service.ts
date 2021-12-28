@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import Post from './post/post.model';
+import { Post, PostBase } from './post/post.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,18 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    return this.http.get(`${this.dbUrl}/posts.json`);
+    return this.http.get(`${this.dbUrl}/posts.json`).pipe(
+      map((res: any) => {
+        const posts = Object.keys(res).reduce(
+          (acc: any[], id: string) => [...acc, { id, ...res[id] }],
+          []
+        );
+        return posts;
+      })
+    );
   }
 
-  addPost(post: Post) {
+  addPost(post: PostBase) {
     return this.http.post(`${this.dbUrl}/posts.json`, post);
   }
 

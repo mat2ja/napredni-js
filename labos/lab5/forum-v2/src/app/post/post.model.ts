@@ -1,7 +1,9 @@
-export default interface Post {
+export interface PostBase {
   user: string;
   timestamp: Date;
   comment: string;
-  // TODO
-  id?: string;
+}
+
+export interface Post extends PostBase {
+  id: string;
 }
