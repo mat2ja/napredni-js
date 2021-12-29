@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    
-  ],
+  declarations: [],
   imports: [CommonModule, FormsModule, RouterModule],
 })
 export class PostModule {}

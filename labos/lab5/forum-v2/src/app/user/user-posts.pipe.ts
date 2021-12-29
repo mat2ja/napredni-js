@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'userPosts',
+  pure: true,
 })
 export class UserPostsPipe implements PipeTransform {
   constructor(private auth: AuthService) {}
