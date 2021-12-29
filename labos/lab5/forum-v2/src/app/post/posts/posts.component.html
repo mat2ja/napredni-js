@@ -1,8 +1,8 @@
 <div class="mb-4 d-flex justify-content-end" *ngIf="!authenticated">
   <a class="btn btn-primary btn-sm" [routerLink]="['login']">Login</a>
-  <a class="btn btn-outline-secondary btn-sm ms-1" [routerLink]="['register']"
-    >Register</a
-  >
+  <a class="btn btn-outline-secondary btn-sm ms-1" [routerLink]="['register']">
+    Register
+  </a>
 </div>
 
 <div
@@ -11,10 +11,12 @@
 >
   <p>
     Welcome
-    <a [routerLink]="['']" class="text-primary user-name">{{ user.name }}</a>
-    <span class="ms-1 text-secondary" class="ms-1 text-secondary user-email"
-      >({{ user.email }})</span
-    >
+    <a [routerLink]="['profile']" class="text-primary user-name">{{
+      user.name
+    }}</a>
+    <span class="ms-1 text-secondary" class="ms-1 text-secondary user-email">
+      ({{ user.email }})
+    </span>
   </p>
   <div *ngIf="authenticated" class="d-flex justify-content-end w-full">
     <button class="btn btn-outline-secondary btn-sm" (click)="logout()">

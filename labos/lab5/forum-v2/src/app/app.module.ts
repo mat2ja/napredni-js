@@ -1,3 +1,5 @@
+import { UserPostsPipe } from './user/user-posts.pipe';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { AuthService } from './auth/auth.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -23,6 +25,8 @@ import AuthGuard from './auth.guard';
     PostNewComponent,
     LoginComponent,
     RegisterComponent,
+    UserProfileComponent,
+    UserPostsPipe
   ],
   imports: [
     BrowserModule,

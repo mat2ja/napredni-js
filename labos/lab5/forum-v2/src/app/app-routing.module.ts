@@ -1,3 +1,4 @@
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { PostsComponent } from './post/posts/posts.component';
@@ -9,7 +10,7 @@ const routes: Routes = [
   { path: '', component: PostsComponent, canActivate: [AuthGuard] },
   {
     path: 'profile',
-    component: PostsComponent,
+    component: UserProfileComponent,
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },
