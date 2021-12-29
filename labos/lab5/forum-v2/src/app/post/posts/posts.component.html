@@ -1,6 +1,8 @@
-<div class="mb-4" *ngIf="!authenticated">
-  <a [routerLink]="['login']">Login</a>
-  <a class="ms-3" [routerLink]="['register']">Register</a>
+<div class="mb-4 d-flex justify-content-end" *ngIf="!authenticated">
+  <a class="btn btn-primary btn-sm" [routerLink]="['login']">Login</a>
+  <a class="btn btn-outline-secondary btn-sm ms-1" [routerLink]="['register']"
+    >Register</a
+  >
 </div>
 
 <div
@@ -21,7 +23,7 @@
   </div>
 </div>
 
-<h2>🦜️ Posts ({{ posts.length }}):</h2>
+<h2 class="mb-3">🦜️ Posts ({{ posts.length }}):</h2>
 <section class="posts">
   <app-post-item
     *ngFor="let post of posts"

@@ -13,25 +13,17 @@
     <textarea *ngIf="editMode" [(ngModel)]="editedComment" class="form-control">
     </textarea>
   </div>
-  <div class="card-footer" *ngIf="isCurrentUser">
-    <button
-      type="button"
-      class="btn btn-danger btn-sm"
-      (click)="deletePost(post.id)"
-    >
-      Delete
-    </button>
+  <div class="card-footer d-flex justify-content-end" *ngIf="isCurrentUser">
     <button
       *ngIf="!editMode"
       type="button"
-      class="btn btn-dark btn-sm ms-2"
+      class="btn btn-dark btn-sm"
       (click)="setEditMode(true)"
     >
       Edit
     </button>
-
     <div
-      class="btn-group btn-group-toggle ms-2"
+      class="btn-group btn-group-toggle"
       data-toggle="edit-buttons"
       *ngIf="editMode"
     >
@@ -51,5 +43,12 @@
         Cancel
       </button>
     </div>
+    <button
+      type="button"
+      class="btn btn-danger btn-sm ms-2"
+      (click)="deletePost(post.id)"
+    >
+      Delete
+    </button>
   </div>
 </div>

@@ -50,12 +50,10 @@ export class DataService {
   getUsers() {
     return this.http.get(`${this.dbUrl}/${this.table.users}.json`).pipe(
       map((res: any) => {
-        const users = Object.keys(res).reduce(
+        return Object.keys(res).reduce(
           (acc: any[], id: string) => [...acc, { id, ...res[id] }],
           []
         );
-        console.log('users :>> ', users);
-        return users;
       })
     );
   }

@@ -29,7 +29,7 @@ export class PostService {
     this.dataService.addPost(post).subscribe((res: any) => {
       const newPost = { id: res.id, ...post };
 
-      this.posts.unshift(newPost);
+      this.posts = [...this.posts, newPost];
       this.postsSubject.next(this.posts);
     });
   }

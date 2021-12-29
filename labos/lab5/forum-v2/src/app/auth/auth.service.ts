@@ -39,18 +39,18 @@ export class AuthService {
     if (this.user) {
       console.log('Set to local storage', this.user);
 
-      localStorage.setItem('user', JSON.stringify(this.user));
+      this.setUserToStorage(this.user);
       this.authChange.next(true);
       this.router.navigate(['']);
     } else {
-      localStorage.removeItem('user');
+      this.removeUserFromStorage();
     }
   }
 
   logout() {
     console.log('logout from auth service');
     this.user = null;
-    localStorage.removeItem('user');
+    this.removeUserFromStorage();
     this.authChange.next(false);
     this.router.navigate(['/login']);
   }
@@ -59,9 +59,20 @@ export class AuthService {
     this.dataService.addUser(credentials).subscribe((res: any) => {
       this.user = { id: res.id, ...credentials };
       this.users.push(this.user);
+
+      this.setUserToStorage(this.user);
       this.usersSubject.next(this.users);
       this.authChange.next(true);
+      this.router.navigate(['']);
     });
+  }
+
+  setUserToStorage(user: User) {
+    sessionStorage.setItem('user', JSON.stringify(this.user));
+  }
+
+  removeUserFromStorage() {
+    sessionStorage.removeItem('user');
   }
 
   isAuthenticated() {
@@ -74,21 +85,19 @@ export class AuthService {
 
   getUser(): User | null {
     if (!this.user) {
-      const localStorageUser = localStorage.getItem('user');
-      this.user = localStorageUser ? JSON.parse(localStorageUser) : null;
+      const storedUser = sessionStorage.getItem('user');
+      this.user = storedUser ? JSON.parse(storedUser) : null;
 
       if (!this.user) return null;
     }
     return { ...this.user };
   }
 
-  getUsers() {
-    return this.usersSubject;
+  getUserById(userId: string) {
+    return this.users.find(({ id }) => id === userId) ?? null;
   }
 
-  getUserById(userId: string) {
-    const user = this.users.find(({ id }) => id === userId) ?? null;
-    console.log('found user :>> ', user);
-    return user;
+  getUsers() {
+    return this.usersSubject;
   }
 }
