@@ -16,42 +16,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  errorMessage: string | null = null;
 
   passwordMatchValidator(g: FormGroup) {
     return g.get('password')!.value === g.get('passwordConfirm')!.value
       ? null
-      : { mismatch: true };
+      : { mismatch: true, message: 'Passwords do not match.' };
   }
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.registerForm = new FormGroup(
-      {
-        username: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        passwordConfirm: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        name: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-      },
-      { validators: this.passwordMatchValidator as null | ValidatorFn }
-    );
+    this.registerForm = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      passwordConfirm: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+    });
   }
 
   onRegister() {
-    console.log(this.registerForm);
+    const passwordError = this.passwordMatchValidator(this.registerForm);
+
+    if (passwordError && passwordError.mismatch) {
+      this.errorMessage = passwordError.message;
+      return;
+    }
+
     const { username, password, name, email } = this.registerForm
       .value as UserRegister;
     const userData: UserBase = {
@@ -60,6 +61,7 @@ export class RegisterComponent implements OnInit {
       name,
       email,
     };
+    this.errorMessage = null;
     this.auth.register(userData);
   }
 }
