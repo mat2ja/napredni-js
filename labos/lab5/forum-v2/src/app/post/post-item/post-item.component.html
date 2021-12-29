@@ -12,7 +12,7 @@
     <textarea *ngIf="editMode" [(ngModel)]="editedComment" class="form-control">
     </textarea>
   </div>
-  <div class="card-footer d-flex justify-content-end" *ngIf="isCurrentUser">
+  <div class="card-footer d-flex justify-content-end" *ngIf="isCurrentUser && hasControls">
     <button
       *ngIf="!editMode"
       type="button"

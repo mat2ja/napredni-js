@@ -32,6 +32,7 @@
     [post]="post"
     (deletedPost)="deletePost($event)"
     (editedPost)="editPost($event)"
+    [hasControls]="true"
   ></app-post-item>
   <app-post-new
     *ngIf="authenticated"

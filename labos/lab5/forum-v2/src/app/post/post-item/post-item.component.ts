@@ -17,6 +17,7 @@ import { Post } from '../post.model';
 })
 export class PostItemComponent implements OnInit, OnDestroy {
   @Input() post: Post;
+  @Input() hasControls: boolean = false;
   @Input() editMode: boolean = false;
 
   @Output() deletedPost = new EventEmitter();
