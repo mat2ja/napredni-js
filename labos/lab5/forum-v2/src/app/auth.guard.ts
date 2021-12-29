@@ -24,7 +24,6 @@ export default class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const user = this.auth.getUser();
-    console.log('guard user', user);
 
     if (!user) {
       this.router.navigate(['login']);
