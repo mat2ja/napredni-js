@@ -12,7 +12,6 @@ export class PostNewComponent implements OnInit {
   user: User | null;
   comment: string = '';
   formShown: boolean = false;
-  error: string = '';
 
   @Output() addedPost = new EventEmitter();
 
@@ -29,17 +28,14 @@ export class PostNewComponent implements OnInit {
 
   submitPost(e: Event) {
     e.preventDefault();
-    if (this.user && this.comment.length) {
+    if (this.user && this.comment.trim().length) {
       const newPost: PostBase = {
         userId: this.user.id,
-        comment: this.comment,
+        comment: this.comment.trim(),
         timestamp: new Date(),
       };
       this.addedPost.emit(newPost);
       this.clearForm();
-      this.error = '';
-    } else {
-      this.error = 'Please fill out both fields';
     }
   }
 }

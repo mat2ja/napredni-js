@@ -1,11 +1,19 @@
-<div class="mt-2">
+<div class="mt-2 d-flex justify-content-end">
   <button
+    *ngIf="!formShown"
+    type="button"
+    class="btn btn-primary"
+    (click)="formShown = true"
+  >
+    Post something
+  </button>
+  <button
+    *ngIf="formShown"
     type="button"
     class="btn"
-    (click)="formShown = !formShown"
-    [ngClass]="formShown ? 'btn-outline-secondary' : 'btn-primary'"
+    (click)="formShown = false"
   >
-    {{ formShown ? "Cancel" : "Add new post" }}
+    Cancel
   </button>
 </div>
 <form
@@ -35,15 +43,14 @@
     >
     </textarea>
   </div>
-  <footer class="mt-2 d-flex justify-content-between align-items-center">
+  <footer class="mt-2 d-flex justify-content-end align-items-center">
     <button
       type="submit"
       class="btn"
-      [ngClass]="comment.length > 0 ? 'btn-success' : 'btn-danger'"
-      [disabled]="!comment.length"
+      [ngClass]="comment.trim().length > 0 ? 'btn-dark' : ''"
+      [disabled]="!comment.trim().length"
     >
       Send
     </button>
-    <span *ngIf="error" class="ms-auto text-danger">{{ error }}</span>
   </footer>
 </form>
