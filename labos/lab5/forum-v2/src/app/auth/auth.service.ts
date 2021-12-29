@@ -37,8 +37,6 @@ export class AuthService {
     this.errorEmitter.next(errorMsg);
 
     if (this.user) {
-      console.log('Set to local storage', this.user);
-
       this.setUserToStorage(this.user);
       this.authChange.next(true);
       this.router.navigate(['']);
@@ -48,7 +46,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logout from auth service');
     this.user = null;
     this.removeUserFromStorage();
     this.authChange.next(false);

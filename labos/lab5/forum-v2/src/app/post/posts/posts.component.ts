@@ -14,7 +14,7 @@ import { Post } from '../post.model';
 export class PostsComponent implements OnInit, OnDestroy {
   user: User | null;
   authenticated = false;
-  posts: Post[] = [];
+  posts: Post[];
   postsSubject: BehaviorSubject<Post[]>;
   postsSubscription: Subscription;
   authChangeSubscription: Subscription;
@@ -49,7 +49,6 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    console.log('logout :>> ');
     this.auth.logout();
   }
 

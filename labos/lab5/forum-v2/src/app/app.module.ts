@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RouterModule } from '@angular/router';
@@ -12,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostNewComponent } from './post/post-new/post-new.component';
+import AuthGuard from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { PostNewComponent } from './post/post-new/post-new.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

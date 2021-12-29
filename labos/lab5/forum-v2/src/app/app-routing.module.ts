@@ -3,10 +3,15 @@ import { LoginComponent } from './auth/login/login.component';
 import { PostsComponent } from './post/posts/posts.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import AuthGuard from './auth.guard';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
-  // { path: 'profile', component: PostsComponent },
+  { path: '', component: PostsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'profile',
+    component: PostsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
