@@ -39,8 +39,8 @@ export class DataService {
   }
 
   editPost(post: Post) {
-    const { timestamp, user, comment } = post;
-    const postBase = { timestamp, user, comment };
+    const { timestamp, userId, comment } = post;
+    const postBase = { timestamp, userId, comment };
     return this.http.patch(
       `${this.dbUrl}/${this.table.posts}/${post.id}.json`,
       postBase

@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { AuthService } from './../../auth/auth.service';
+import { Subscription } from 'rxjs';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { Post } from '../post.model';
 
 @Component({
@@ -6,21 +15,48 @@ import { Post } from '../post.model';
   templateUrl: './post-item.component.html',
   styleUrls: ['./post-item.component.scss'],
 })
-export class PostItemComponent implements OnInit {
-  @Input() post: Post | null = null;
+export class PostItemComponent implements OnInit, OnDestroy {
+  @Input() post: Post;
   @Input() editMode: boolean = false;
 
   @Output() deletedPost = new EventEmitter();
   @Output() editedPost = new EventEmitter();
 
   editedComment: string = '';
+  username: string;
+  isCurrentUser = false;
 
-  constructor() {}
+  authChangeSubscription: Subscription;
+  usersSubscription: Subscription;
+
+  constructor(private auth: AuthService) {}
+
+  ngOnInit(): void {
+    this.editedComment = this.post.comment;
+
+    this.setCurrentUser();
+    this.setUsername();
+
+    this.authChangeSubscription = this.auth.authChange.subscribe((res) => {
+      this.setCurrentUser();
+    });
+    this.usersSubscription = this.auth.getUsers().subscribe((res) => {
+      this.setUsername();
+    });
+  }
+
+  setCurrentUser() {
+    this.isCurrentUser = this.auth.isCurrentUser(this.post.userId);
+  }
+
+  setUsername() {
+    this.username = this.auth.getUserById(this.post.userId)?.username || '';
+  }
 
   setEditMode(bool: boolean) {
     this.editMode = bool;
-    if (this.editMode && this.post?.comment) {
-      this.editedComment = this.post?.comment;
+    if (this.editMode) {
+      this.editedComment = this.post.comment;
     }
   }
 
@@ -42,9 +78,8 @@ export class PostItemComponent implements OnInit {
     return new Date(ts).toLocaleString('de');
   }
 
-  ngOnInit(): void {
-    if (this.post?.comment) {
-      this.editedComment = this.post.comment;
-    }
+  ngOnDestroy(): void {
+    this.authChangeSubscription.unsubscribe();
+    this.usersSubscription.unsubscribe();
   }
 }

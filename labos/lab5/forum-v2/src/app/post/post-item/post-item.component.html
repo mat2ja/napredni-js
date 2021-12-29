@@ -1,6 +1,7 @@
 <div class="card post" *ngIf="post">
   <div class="card-header">
-    <p class="user text-primary">@{{ post.user }}</p>
+    <!-- TODO -->
+    <p class="user text-primary">@{{ username }}</p>
     <p class="timestamp text-secondary">
       {{ formatTimestamp(post.timestamp) }}
     </p>
@@ -12,7 +13,7 @@
     <textarea *ngIf="editMode" [(ngModel)]="editedComment" class="form-control">
     </textarea>
   </div>
-  <div class="card-footer">
+  <div class="card-footer" *ngIf="isCurrentUser">
     <button
       type="button"
       class="btn btn-danger btn-sm"

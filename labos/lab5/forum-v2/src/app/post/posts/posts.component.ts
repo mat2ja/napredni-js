@@ -37,14 +37,14 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.user = this.auth.getUser();
     this.authenticated = this.auth.isAuthenticated();
 
-    this.postsSubject = this.postService.getPosts();
-    this.postsSubscription = this.postsSubject.subscribe((res) => {
-      this.posts = res;
-    });
-
     this.authChangeSubscription = this.auth.authChange.subscribe((res) => {
       this.authenticated = this.auth.isAuthenticated();
       this.user = this.auth.getUser();
+    });
+
+    this.postsSubject = this.postService.getPosts();
+    this.postsSubscription = this.postsSubject.subscribe((res) => {
+      this.posts = res;
     });
   }
 

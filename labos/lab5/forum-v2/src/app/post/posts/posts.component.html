@@ -29,5 +29,8 @@
     (deletedPost)="deletePost($event)"
     (editedPost)="editPost($event)"
   ></app-post-item>
-  <app-post-new (addedPost)="addPost($event)"></app-post-new>
+  <app-post-new
+    *ngIf="authenticated"
+    (addedPost)="addPost($event)"
+  ></app-post-new>
 </section>

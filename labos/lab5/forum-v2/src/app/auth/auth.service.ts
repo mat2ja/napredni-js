@@ -37,6 +37,8 @@ export class AuthService {
     this.errorEmitter.next(errorMsg);
 
     if (this.user) {
+      console.log('Set to local storage', this.user);
+
       localStorage.setItem('user', JSON.stringify(this.user));
       this.authChange.next(true);
       this.router.navigate(['']);
@@ -66,6 +68,10 @@ export class AuthService {
     return this.user != null;
   }
 
+  isCurrentUser(userId: string) {
+    return this.isAuthenticated() && this.user?.id === userId;
+  }
+
   getUser(): User | null {
     if (!this.user) {
       const localStorageUser = localStorage.getItem('user');
@@ -74,5 +80,15 @@ export class AuthService {
       if (!this.user) return null;
     }
     return { ...this.user };
+  }
+
+  getUsers() {
+    return this.usersSubject;
+  }
+
+  getUserById(userId: string) {
+    const user = this.users.find(({ id }) => id === userId) ?? null;
+    console.log('found user :>> ', user);
+    return user;
   }
 }

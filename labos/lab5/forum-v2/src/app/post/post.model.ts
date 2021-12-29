@@ -1,5 +1,5 @@
 export interface PostBase {
-  user: string;
+  userId: string;
   timestamp: Date;
   comment: string;
 }
