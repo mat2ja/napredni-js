@@ -11,6 +11,7 @@
         background: #212121;
         font-size: 24px;
       }
+
       form {
         max-width: 800px;
         margin: 0 auto;
@@ -18,21 +19,28 @@
         margin-top: 5vh;
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
       }
 
-      .inputs {
+      .numbers {
         display: flex;
+        justify-content: center;
         gap: 1rem;
+      }
+
+      .numbers input {
+        max-width: 200px;
       }
 
       input {
         padding: 1rem;
         border: none;
-        flex: 1;
-        font: inherit;
         font-weight: bold;
         border-radius: 100rem;
+        text-align: center;
+        font-size: 32px;
+        max-width: 400px;
       }
 
       .btns {
@@ -60,42 +68,76 @@
       #btn-sub {
         background: tomato;
       }
+      #input-result:disabled {
+        color: black !important;
+      }
     </style>
   </head>
 
   <body>
     <form>
-      <div class="inputs">
+      <div class="numbers">
         <input type="number" name="x" placeholder="x" />
         <input type="number" name="y" placeholder="y" />
       </div>
+      <input type="text" disabled id="input-result" />
       <div class="btns">
         <button type="button" id="btn-add">+</button>
         <button type="button" id="btn-sub">-</button>
       </div>
-      <input type="text" disabled />
     </form>
 
     <script>
-      const baseUrl = 'http://localhost:8001';
+      const baseUrl = 'http://localhost:8888';
       const btnAdd = document.querySelector('#btn-add');
       const btnSub = document.querySelector('#btn-sub');
       const xEl = document.querySelector('input[name="x"]');
-      const yEl = document.querySelector('input[name="x"]');
+      const yEl = document.querySelector('input[name="y"]');
+      const resultEl = document.querySelector('#input-result');
 
-
-      const getValuesAndFetch(route) {
-
-      }
-
-      btnAdd.addEventListener('click', async (e) => {
-        console.log(e);
+      const getValues = () => {
         const x = parseInt(xEl.value);
         const y = parseInt(yEl.value);
-        const data = await fetch(`${baseUrl}/z`, {
+        return [x, y];
+      };
+
+      const validateValues = (x, y) => {
+        return x != null && y != null && !isNaN(x) && !isNaN(y);
+      };
+
+      const setResult = (value = null) => {
+        resultEl.value = value;
+      };
+
+      const fetchResult = async (route) => {
+        return await fetch(`${baseUrl}${route}`, {
           mode: 'no-cors',
         }).then((res) => res.json());
-        console.log('data :>> ', data);
+      };
+
+      const buildSearchParams = (x, y) => {
+        const params = new URLSearchParams({ x, y });
+        return params.toString();
+      };
+
+      btnAdd.addEventListener('click', async (e) => {
+        const [x, y] = getValues();
+        if (!validateValues(x, y)) {
+          setResult(null);
+          return;
+        }
+        const res = await fetchResult(`/z?${buildSearchParams(x, y)}`);
+        setResult(res);
+      });
+      btnSub.addEventListener('click', async (e) => {
+        const [x, y] = getValues();
+        if (!validateValues(x, y)) {
+          setResult(null);
+          return;
+        }
+
+        const res = await fetchResult(`/o?${buildSearchParams(x, y)}`);
+        setResult(res);
       });
     </script>
   </body>
