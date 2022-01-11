@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Lab6</title>
     <meta name="author" content="Matija Osrečki" />
 
     <style>
@@ -77,8 +77,8 @@
   <body>
     <form>
       <div class="numbers">
-        <input type="number" name="x" placeholder="x" />
-        <input type="number" name="y" placeholder="y" />
+        <input type="number" name="x" placeholder="x" class="params" />
+        <input type="number" name="y" placeholder="y" class="params" />
       </div>
       <input type="text" disabled id="input-result" />
       <div class="btns">
@@ -89,56 +89,40 @@
 
     <script>
       const baseUrl = 'http://localhost:8888';
+      const routes = { add: '/z', sub: '/o' };
+
       const btnAdd = document.querySelector('#btn-add');
       const btnSub = document.querySelector('#btn-sub');
-      const xEl = document.querySelector('input[name="x"]');
-      const yEl = document.querySelector('input[name="y"]');
+      const numInputs = [...document.querySelectorAll('input.params')];
       const resultEl = document.querySelector('#input-result');
 
-      const getValues = () => {
-        const x = parseInt(xEl.value);
-        const y = parseInt(yEl.value);
-        return [x, y];
-      };
+      const parseValues = () => numInputs.map((n) => parseInt(n.value, 10));
 
-      const validateValues = (x, y) => {
-        return x != null && y != null && !isNaN(x) && !isNaN(y);
-      };
+      const validateValues = (...values) =>
+        values.every((n) => n != null && !isNaN(n));
 
-      const setResult = (value = null) => {
-        resultEl.value = value;
-      };
+      const setResult = (value) => (resultEl.value = value);
 
-      const fetchResult = async (route) => {
-        return await fetch(`${baseUrl}${route}`, {
+      const fetchResult = async (route, params = '') =>
+        await fetch(`${baseUrl}${route}?${params}`, {
           mode: 'no-cors',
         }).then((res) => res.json());
+
+      const buildSearchParams = (params) =>
+        new URLSearchParams(params).toString();
+
+      const calculateResult = async (route) => {
+        const [x, y] = parseValues();
+
+        const res = validateValues(x, y)
+          ? await fetchResult(route, buildSearchParams({ x, y }))
+          : null;
+
+        setResult(res);
       };
 
-      const buildSearchParams = (x, y) => {
-        const params = new URLSearchParams({ x, y });
-        return params.toString();
-      };
-
-      btnAdd.addEventListener('click', async (e) => {
-        const [x, y] = getValues();
-        if (!validateValues(x, y)) {
-          setResult(null);
-          return;
-        }
-        const res = await fetchResult(`/z?${buildSearchParams(x, y)}`);
-        setResult(res);
-      });
-      btnSub.addEventListener('click', async (e) => {
-        const [x, y] = getValues();
-        if (!validateValues(x, y)) {
-          setResult(null);
-          return;
-        }
-
-        const res = await fetchResult(`/o?${buildSearchParams(x, y)}`);
-        setResult(res);
-      });
+      btnAdd.addEventListener('click', () => calculateResult(routes.add));
+      btnSub.addEventListener('click', () => calculateResult(routes.sub));
     </script>
   </body>
 </html>

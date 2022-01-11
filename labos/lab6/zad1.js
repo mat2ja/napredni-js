@@ -1,39 +1,17 @@
-const fs = require('fs');
-const { promisify } = require('util');
-
-const readFileAsync = promisify(fs.readFile);
-const writeFileAsync = promisify(fs.writeFile);
-
-const readFileFn = async (fileName) => {
-  try {
-    const data = await readFileAsync(fileName);
-    return data.toString();
-  } catch (err) {
-    console.error(err.message);
-  }
-};
-
-const writeFileFn = async (fileName, content) => {
-  try {
-    await writeFileAsync(fileName, content);
-  } catch (err) {
-    console.error(err.message);
-  }
-};
+const { readFile, writeFile } = require('fs/promises');
 
 const readAndWrite = async (inFileName, outFileName, callback) => {
   try {
-    const content = await readFileFn(inFileName);
-    const newContent = callback ? callback(content) : content;
-    await writeFileFn(outFileName, newContent);
+    const content = await readFile(inFileName).then((c) => c.toString());
+    const newContent = callback?.(content) ?? content;
+    await writeFile(outFileName, newContent);
   } catch (err) {
     console.error(err.message);
   }
 };
 
-const parseNumbers = (content) => {
-  const whitespaceRgx = /\s+/g;
-  const numbers = content.split(whitespaceRgx).map(Number);
+const parseNumbers = (content, regex = /\s+/g) => {
+  const numbers = content.split(regex).map(Number);
   return numbers;
 };
 

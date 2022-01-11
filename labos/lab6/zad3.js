@@ -1,8 +1,6 @@
 const { createServer } = require('http');
 const url = require('url');
-const { readFile } = require('fs');
-const { promisify } = require('util');
-const readFileAsync = promisify(readFile);
+const { readFile } = require('fs/promises');
 
 createServer(async (req, res) => {
   const { pathname, query } = url.parse(req.url, true);
@@ -10,7 +8,7 @@ createServer(async (req, res) => {
   try {
     switch (pathname) {
       case '/': {
-        const data = await readFileAsync('./index.html', 'utf8');
+        const data = await readFile('./index.html', 'utf8');
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data.toString());
         res.end();
@@ -19,6 +17,7 @@ createServer(async (req, res) => {
       case '/z': {
         const { x, y } = query;
         const result = Number(x) + Number(y);
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.write(result.toString());
         res.end();
         break;
@@ -26,12 +25,12 @@ createServer(async (req, res) => {
       case '/o': {
         const { x, y } = query;
         const result = Number(x) - Number(y);
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.write(result.toString());
         res.end();
         break;
       }
       default: {
-        throw new Error();
       }
     }
   } catch (err) {
