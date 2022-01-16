@@ -1,0 +1,34 @@
+<h2>Admin page</h2>
+
+<table class="table table-striped">
+
+    <tr>
+
+        <th>#</th>
+        <th>Username</th>
+        <th>Level</th>
+        <th>Update</th>
+        <th>Delete</th>
+
+    </tr>
+
+    <tr ng-repeat="user in c.users">
+
+        <td>{{$index+1}}</td>
+        <td>{{user.username}}</td>
+        <td>
+
+            <span ng-show="user.level==1">Admin</span>
+            <span ng-show="user.level==2">User</span>
+
+        </td>
+        <td>
+            <button class="btn btn-primary"  ng-click="c.doUpdate($index)">Update</button>
+        </td>
+        <td>
+            <button class="btn btn-danger" ng-click="c.doDelete(user.id)">Delete</button>
+        </td>
+
+    </tr>
+
+</table>

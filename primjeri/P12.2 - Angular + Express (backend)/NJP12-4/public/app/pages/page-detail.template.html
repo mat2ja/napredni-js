@@ -1,0 +1,12 @@
+<h1>{{c.country.name}}</h1>
+<br/>
+
+
+<ul>
+
+    <li>Flag:<img ng-src="{{c.country.flagURL}}" width=100/></li>
+    <li>Population: {{c.country.population | number}}</li>
+    <li>Capital: {{c.country.capital}} </li>
+    <li>GDP: {{c.country.gdp | currency }}</li>
+
+</ul>

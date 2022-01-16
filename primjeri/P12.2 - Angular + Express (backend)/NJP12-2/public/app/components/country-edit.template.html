@@ -1,0 +1,31 @@
+<div class="well">
+    <form name="unos" novalidate>
+        <fieldset class="form-group" ng-class="{ 'has-error' : unos.name.$invalid && !unos.name.$pristine }">
+            <label>Name:</label>
+            <input name="name" class="form-control" type="text" ng-model="c.country.name" required/>
+        </fieldset>
+        <fieldset class="form-group" ng-class="{ 'has-error' : unos.population.$invalid && !unos.population.$pristine }">
+            <label>Population</label>
+            <input name="population" class="form-control" type="number" ng-model="c.country.population" required/>
+        </fieldset>
+        <fieldset class="form-group" ng-class="{ 'has-error' : unos.flagURL.$invalid && !unos.flagURL.$pristine }">
+            <label>Flag URL</label>
+            <input name="flagURL" class="form-control" type="url" ng-model="c.country.flagURL" required/>
+        </fieldset>
+        <fieldset class="form-group" ng-class="{ 'has-error' : unos.capital.$invalid && !unos.capital.$pristine }">
+            <label>Capital</label>
+            <input name="capital" class="form-control" type="text" ng-model="c.country.capital" ng-minlength="5" required/>
+        </fieldset>
+        <fieldset class="form-group" ng-class="{ 'has-error' : unos.gdp.$invalid && !unos.gdp.$pristine }">
+            <label>GDP</label>
+            <input name="gdp" class="form-control" type="number" ng-model="c.country.gdp" required/>
+        </fieldset>
+    </form>
+
+    <button class="btn btn-success" ng-disabled="unos.$invalid" ng-show="c.mode=='add'" ng-click="c.addCountry();">Add</button>
+    <button class="btn btn-success" ng-disabled="unos.$invalid" ng-show="c.mode=='edit'" ng-click="c.doneEditing();">Finish editing</button>
+
+
+</div>
+
+<!-- input type number => map u servisu -->

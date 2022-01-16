@@ -8,32 +8,24 @@ const mainRouter = express.Router();
 let connection;
 
 async function init() {
-
-    connection = await mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : '',
-        database : 'njp'
-    });
-
+  connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'njp',
+  });
 }
 
 init();
 
-mainRouter.get('/', function (req, res) {
-
-    res.sendFile(path.join(__dirname,'index2.html'));
-
+mainRouter.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index2.html'));
 });
 
-mainRouter.get('/data', async function (req,res){
-
-    let rows = await connection.query('SELECT * FROM countries');
-    res.send(rows);
-
+mainRouter.get('/data', async (req, res) => {
+  let rows = await connection.query('SELECT * FROM countries');
+  res.send(rows);
 });
-
-
 
 app.use('/', mainRouter);
 

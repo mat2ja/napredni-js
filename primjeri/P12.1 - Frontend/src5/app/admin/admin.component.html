@@ -1,0 +1,19 @@
+<h3>User list:</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Level</th>
+        <th>Change</th>
+    </tr>
+    <tr *ngFor="let u of users">
+        <th>{{u.username}}</th>
+        <th>{{u.name}}</th>
+        <th>{{u.email}}</th>
+        <th>{{u.level==1 ? 'Admin' : 'User'}}</th>
+        <th>
+            <button class="btn btn-success" (click)="changeLevel(u)">Change</button>
+        </th>
+    </tr>
+</table>

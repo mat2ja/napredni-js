@@ -1,19 +1,21 @@
 <html ng-app="mainApp">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Angular.js Example</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script>
+      var app = angular.module('mainApp', []);
 
-        var app = angular.module('mainApp', []);
-
-        app.component('login', {
-           template:`
+      app.component('login', {
+        template: `
            <div style="padding:30px" class="panel row" >
             <div class="col-md-6">
 
@@ -44,32 +46,22 @@
             </div>
         </div>
            `,
-            controller:function($http){
-
-                this.doLogin=function(){
-
-                    $http.post('http://localhost:8081/login',{credentials: this.credentials}).then((data)=>{
-
-
-                        console.log(data);
-
-                    });
-
-                }
-
-            },
-            controllerAs:'c'
-        });
-
-
-
-
+        controller: function ($http) {
+          this.doLogin = function () {
+            $http
+              .post('http://localhost:8081/login', {
+                credentials: this.credentials,
+              })
+              .then((data) => {
+                console.log(data);
+              });
+          };
+        },
+        controllerAs: 'c',
+      });
     </script>
-
-
-</head>
-<body>
-<login></login>
-</body>
+  </head>
+  <body>
+    <login></login>
+  </body>
 </html>
-

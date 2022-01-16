@@ -1,40 +1,33 @@
 <html ng-app="countryApp">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Angular i Node</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     <script>
-        var countryApp = angular.module('countryApp', []);
+      var countryApp = angular.module('countryApp', []);
 
-        countryApp.component('main',{
-
-            template:`TEST`,
-            controller:function($http){
-
-                $http.get('/api/users').then(data=>{
-
-                    console.log(data);
-                    console.log(data.data);
-                    console.log(data.data.users);
-                    console.table(data.data.users);
-
-                });
-
-            }
-
-        });
-
-
-
+      countryApp.component('main', {
+        template: `TEST`,
+        controller: function ($http) {
+          $http.get('/api/users').then((data) => {
+            console.log(data);
+            console.log(data.data);
+            console.log(data.data.users);
+            console.table(data.data.users);
+          });
+        },
+      });
     </script>
-</head>
-<body>
-<main></main>
-</body>
+  </head>
+  <body>
+    <main></main>
+  </body>
 </html>

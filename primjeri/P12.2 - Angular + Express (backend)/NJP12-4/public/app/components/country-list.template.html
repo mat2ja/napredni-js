@@ -1,0 +1,30 @@
+<table class="table table-striped table-bordered table-hover">
+
+    <th>#</th>
+    <th>Country</th>
+    <th>Flag</th>
+    <th>Population</th>
+    <th>Capital</th>
+    <th>GDP</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+
+    <tr ng-repeat="country in c.countries">
+        <td>{{$index+1}}</td>
+        <td><a ui-sref="detail({countryName:country.name})">{{country.name}}</a></td>
+        <td><img ng-src="{{country.flagURL}}" width=20/></td>
+        <td>{{country.population | number}}</td>
+        <td>{{country.capital | uppercase }}</td>
+        <td>{{country.gdp | currency}}</td>
+        <td><button class="btn btn-info" ng-click="c.changeSelected(country); c.mode='edit'">Edit</button></td>
+        <td><button class="btn btn-danger" ng-click="c.doDelete(country.id)">Delete</button></td>
+    </tr>
+
+</table>
+
+<br/>
+
+<button ng-show="c.mode==''" class="btn btn-success" ng-click="c.mode='add'">Add new country!</button>
+<button ng-show="c.mode!=''" class="btn btn-danger" ng-click="c.mode=''">Cancel</button><br/>
+<country-edit country="c.selectedCountry" mode="c.mode" ng-show="c.mode!=''"></country-edit>
+<br/>
